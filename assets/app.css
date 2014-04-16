@@ -1,0 +1,21 @@
+body {
+  background-color: #000000;
+  margin: 0px;
+  overflow: hidden;
+}
+
+/* Custom dat.gui upload component */
+.dg .c input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+  width: 0px;
+}
+
+.dg .c input[type=file] {
+  background: #303030;
+  outline: none;
+  color: #1ed36f;
+  border: 0;
+  margin-top: 4px;
+  width: 100%;
+  float: right;
+}
