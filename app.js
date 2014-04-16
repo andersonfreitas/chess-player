@@ -1,0 +1,1 @@
+ChessPlayer.init();

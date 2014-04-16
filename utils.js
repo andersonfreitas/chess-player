@@ -11,15 +11,6 @@
     this.Utils = Utils;
   }
 
-  Utils.loadLocalFile = function(callback) {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-
-
-    } else {
-      alert('The File APIs are not fully supported in this browser.');
-    }
-  }
-
   /**
   Utils.loadRemoteFile("README.md", function(url, contents) { console.log("URL", url, "Contents", contents) })
    */
