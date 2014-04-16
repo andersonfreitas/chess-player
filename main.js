@@ -1,3 +1,5 @@
+ChessPlayer.init();
+
 var wireframe = true;
 var A = 0.15;
 var v = 1.0;

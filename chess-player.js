@@ -1,7 +1,5 @@
 var ChessPlayer = (function() {
 
-  var container = document.getElementById('container');
-  var controls = document.getElementsByTagName('body');
   var gui = new dat.GUI({ autoPlace: true });
 
   var properties = {
@@ -43,15 +41,37 @@ var ChessPlayer = (function() {
     }
   };
 
-  function teste() {
-    console.log("teste()");
-    return "teste";
+  function handleFileSelect(evt) {
+    var files = evt.target.files;
+
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      // console.log(escape(f.name), f.stype || 'n/a', ' - ', f.size, ' bytes, last modified: ', f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a');
+
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+          console.log(e.target.result);
+        };
+      })(f);
+
+      reader.readAsText(f);
+    }
+
+    console.log("handleFileSelect")
+  }
+
+  function initLocalFileLoad() {
+    $(".property-name:contains(pgn) ~ .c").html('<input type="file" id="filename" />');
+    $("#filename").on('change', handleFileSelect);
   }
 
   function init() {
-    console.log(container)
-    console.log("init()");
-    console.log(teste());
+    console.log("initWebGL()");
+    console.log("loadStage()");
+    console.log("loadPieces()");
+
+    initLocalFileLoad();
 
     folders.game.open();
     folders.scene.open();
@@ -62,5 +82,3 @@ var ChessPlayer = (function() {
     init: init
   }
 })();
-
-ChessPlayer.init();
