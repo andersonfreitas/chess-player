@@ -4,9 +4,9 @@
  - PGN carregado e interpretado corretamente
  - [AMF] Tabuleiro exibido corretamente (espessura, cores e quadrados)
  - Peças instanciadas e posicionadas (inicialmente) corretamente
- - [AMF] Perspectiva e viewport atualizados ao redimensionar a janela
+ - [OK] Perspectiva e viewport atualizados ao redimensionar a janela
  - [AMF] Troca de Projeções oferecida e executada corretamente
- - [AMF] Cena centralizada no viewport
+ - [OK] Cena centralizada no viewport
  - [AMF] Movimentação da câmera executado corretamente
  - [AMF] Movimentação das peças gradual e correta.
  - Peças desaparecem corretamente
@@ -15,9 +15,10 @@
  - Reiniciar o jogo desenvolvido e executado corretamente
  - Arquivo LEIAME.TXT criado com conteúdo satisfatório e correto
  - Projeto entregue corretamente no PACA e compactado
+ - Extra: Fazer rodar em um iPhone!
 
- - Executar em um iPhone!!!
- - Estrutura de classes básicas para o projeto
+
+ - [X] Estrutura de classes básicas para o projet @done
 
  - Desenhar um tabuleiro
     - (carregar o tabuleiro via .OBJ? ou é complicar?)
