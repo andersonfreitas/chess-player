@@ -1,5 +1,5 @@
 function BaseObject() {
-  this.position = [0.0, 0.0, 0.0];
+  this.position = vec3.create();
 
   this.vertexBuffer = 0;
   this.indexBuffer = 0;
@@ -96,14 +96,11 @@ BaseObject.prototype.render = function() {
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
   if (ChessPlayer.properties.scene.wireframe) {
-    gl.drawElements(gl.LINES, this.indices.length, gl.UNSIGNED_SHORT, 0);
+    gl.drawElements(gl.LINE_LOOP, this.indices.length, gl.UNSIGNED_SHORT, 0);
   } else {
     gl.drawElements(gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0);
   }
-};
-
-BaseObject.prototype.moveOriginTo = function(x, y, z) {
-};
+}
 
 // animateTo(pos, timing, easingFunction)
 // tick() -- update animation position

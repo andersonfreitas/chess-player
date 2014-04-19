@@ -59,10 +59,11 @@ var ChessPlayer = (function() {
   var game = {};
 
   function initScene() {
-    function addToScene(object) { scene.push(object); return object; }
+    var x = 0;
+    function addToScene(object) { scene.push(object); object.position = vec3.fromValues(-2.50 + x, 0,0); x += 0.5; return object; }
 
     this.game = {
-      board: addToScene(new Board()),
+      // board: addToScene(new Board()),
 
       // one king, one queen, two rooks, two knights, two bishops, and eight pawns
       pieces: {
@@ -145,18 +146,23 @@ var ChessPlayer = (function() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100.0);
-    mat4.identity(mvMatrix);
 
     gl.useProgram(currentProgram);
 
     // gl.uniform1f(gl.getUniformLocation(currentProgram, 'time'), parameters.time / 1000);
     // gl.uniform2f(gl.getUniformLocation(currentProgram, 'resolution'), parameters.screenWidth, parameters.screenHeight);
 
-    mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, 0, -3));
 
-    setMatrixUniforms();
 
-    _.invoke(scene, 'render');
+    for (var i = scene.length - 1; i >= 0; i--) {
+      obj = scene[i];
+
+      mat4.identity(mvMatrix);
+      mat4.translate(mvMatrix, mvMatrix, obj.position);
+      mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, 0, -3));
+      setMatrixUniforms();
+      obj.render();
+    }
   }
 
   function updateAnimationTime() {
