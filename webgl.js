@@ -25,7 +25,7 @@ var WebGL = (function() {
     currentProgram = createProgram(vertexShader, fragmentShader);
 
     onWindowResize();
-    window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener('resize', _.debounce(onWindowResize, 300, false), false);
 
     gl.clearColor(0.98, 0.98, 0.98, 1.0);
     gl.enable(gl.DEPTH_TEST);
@@ -85,5 +85,5 @@ var WebGL = (function() {
 
   return {
     init: init
-  }
+  };
 })();

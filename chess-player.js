@@ -20,7 +20,8 @@ var ChessPlayer = (function() {
       reload: function() { console.log("Reloading PGN from file... " + properties.game.pgn); },
       autoplay: true,
       next: function() { console.log("Playing NEXT move from PGN..."); },
-      previous: function() { console.log("Playing PREVIOUS move from PGN..."); }
+      previous: function() { console.log("Playing PREVIOUS move from PGN..."); },
+      paused: false
     },
     scene: {
       projection: 'perspective',
@@ -42,7 +43,8 @@ var ChessPlayer = (function() {
       reload: folders.game.add(properties.game, 'reload'),
       autoplay: folders.game.add(properties.game, 'autoplay'),
       next: folders.game.add(properties.game, 'next'),
-      previous: folders.game.add(properties.game, 'previous')
+      previous: folders.game.add(properties.game, 'previous'),
+      paused: folders.game.add(properties.game, 'paused')
     },
     scene: {
       projection: folders.scene.add(properties.scene, 'projection', [ 'perspective', 'isometric'] ),
@@ -53,12 +55,13 @@ var ChessPlayer = (function() {
     }
   };
 
-  var scene = [], game;
+  var scene = [];
+  var game = {};
 
   function initScene() {
-    function addToScene(object) { scene.push(object); }
+    function addToScene(object) { scene.push(object); return object; }
 
-    game = {
+    this.game = {
       board: addToScene(new Board()),
 
       // one king, one queen, two rooks, two knights, two bishops, and eight pawns
@@ -106,7 +109,7 @@ var ChessPlayer = (function() {
       reader.readAsText(f);
     }
 
-    console.log("handleFileSelect")
+    console.log("handleFileSelect");
   }
 
   function initShaderVars() {
@@ -158,7 +161,7 @@ var ChessPlayer = (function() {
 
   function updateAnimationTime() {
     var timeNow = new Date().getTime();
-    if (lastTime != 0) {
+    if (lastTime !== 0) {
         var elapsed = timeNow - lastTime;
     }
     lastTime = timeNow;
@@ -190,5 +193,5 @@ var ChessPlayer = (function() {
     init: init,
     initScene: initScene,
     properties: properties
-  }
+  };
 })();

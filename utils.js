@@ -12,18 +12,18 @@
   }
 
   /**
-  Utils.loadRemoteFile("README.md", function(url, contents) { console.log("URL", url, "Contents", contents) })
+  Utils.loadRemoteFile(this, "README.md", function(url, contents) { console.log("URL", url, "Contents", contents) })
    */
-  Utils.loadRemoteFile = function(url, callback) {
+  Utils.loadRemoteFile = function(context, url, callback) {
     var req = new XMLHttpRequest();
 
     if (req) {
-      req.overrideMimeType("text/plain")
+      req.overrideMimeType("text/plain");
       req.onreadystatechange = function() {
 
         if (this.readyState == 4) {
-          if (this.status == 200 || this.status == 0) {
-            callback.call(null, url, this.responseText);
+          if (this.status == 200 || this.status === 0) {
+            callback.call(context, url, this.responseText);
           } else {
             console.error("Error loading file: " + url + " status " + this.status);
           }

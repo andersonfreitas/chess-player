@@ -1,1 +1,3 @@
-ChessPlayer.init();
+$(document).ready(function() {
+  ChessPlayer.init();
+});
