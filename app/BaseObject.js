@@ -1,5 +1,5 @@
 function BaseObject() {
-  this.position = [ 0.0, 0.0, 0.0 ];
+  this.position = [0.0, 0.0, 0.0];
 
   this.vertexBuffer;
   this.indexBuffer;

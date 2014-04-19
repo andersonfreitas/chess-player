@@ -2,10 +2,10 @@ function Cube() {
   BaseObject.call(this);
 
   this.loaded = false;
-  this.contents = "";
+  this.contents = '';
 
   Utils.loadRemoteFile(this, 'assets/obj/cube.obj', this.onLoad);
-};
+}
 
 Cube.prototype = new BaseObject();
 
@@ -19,10 +19,10 @@ Cube.prototype.onLoad = function(url, contents) {
 
   this.contents = contents;
   this.loaded = true;
-}
+};
 
 Cube.prototype.render = function() {
   if (loaded) {
 
   }
-}
+};

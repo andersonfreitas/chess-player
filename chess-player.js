@@ -16,11 +16,11 @@ var ChessPlayer = (function() {
 
   var properties = {
     game: {
-      pgn: "sample.pgn",
-      reload: function() { console.log("Reloading PGN from file... " + properties.game.pgn); },
+      pgn: 'sample.pgn',
+      reload: function() { console.log('Reloading PGN from file... ' + properties.game.pgn); },
       autoplay: true,
-      next: function() { console.log("Playing NEXT move from PGN..."); },
-      previous: function() { console.log("Playing PREVIOUS move from PGN..."); },
+      next: function() { console.log('Playing NEXT move from PGN...'); },
+      previous: function() { console.log('Playing PREVIOUS move from PGN...'); },
       paused: false
     },
     scene: {
@@ -47,7 +47,7 @@ var ChessPlayer = (function() {
       paused: folders.game.add(properties.game, 'paused')
     },
     scene: {
-      projection: folders.scene.add(properties.scene, 'projection', [ 'perspective', 'isometric'] ),
+      projection: folders.scene.add(properties.scene, 'projection', ['perspective', 'isometric']),
       wireframe: folders.scene.add(properties.scene, 'wireframe'),
       lightning: folders.scene.add(properties.scene, 'lightning'),
       shadows: folders.scene.add(properties.scene, 'shadows'),
@@ -66,25 +66,25 @@ var ChessPlayer = (function() {
 
       // one king, one queen, two rooks, two knights, two bishops, and eight pawns
       pieces: {
-        king: addToScene(new ChessPiece("rei")),
-        queen: addToScene(new ChessPiece("rainha")),
+        king: addToScene(new ChessPiece('rei')),
+        queen: addToScene(new ChessPiece('rainha')),
         rooks: [
-          addToScene(new ChessPiece("torre")),
-          addToScene(new ChessPiece("torre"))
+          addToScene(new ChessPiece('torre')),
+          addToScene(new ChessPiece('torre'))
         ],
         knights: [
-          addToScene(new ChessPiece("cavalo")),
-          addToScene(new ChessPiece("cavalo"))
+          addToScene(new ChessPiece('cavalo')),
+          addToScene(new ChessPiece('cavalo'))
         ],
         bishops: [
-          addToScene(new ChessPiece("bispo")),
-          addToScene(new ChessPiece("bispo"))
+          addToScene(new ChessPiece('bispo')),
+          addToScene(new ChessPiece('bispo'))
         ],
         pawns: [
-          addToScene(new ChessPiece("peao")), addToScene(new ChessPiece("peao")),
-          addToScene(new ChessPiece("peao")), addToScene(new ChessPiece("peao")),
-          addToScene(new ChessPiece("peao")), addToScene(new ChessPiece("peao")),
-          addToScene(new ChessPiece("peao")), addToScene(new ChessPiece("peao"))
+          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
+          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
+          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
+          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao'))
         ]
       }
     };
@@ -109,23 +109,23 @@ var ChessPlayer = (function() {
       reader.readAsText(f);
     }
 
-    console.log("handleFileSelect");
+    console.log('handleFileSelect');
   }
 
   function initShaderVars() {
-    currentProgram.vertexPositionAttribute = gl.getAttribLocation(currentProgram, "aVertexPosition");
+    currentProgram.vertexPositionAttribute = gl.getAttribLocation(currentProgram, 'aVertexPosition');
     gl.enableVertexAttribArray(currentProgram.vertexPositionAttribute);
 
-    currentProgram.vertexColorAttribute = gl.getAttribLocation(currentProgram, "aVertexColor");
+    currentProgram.vertexColorAttribute = gl.getAttribLocation(currentProgram, 'aVertexColor');
     gl.enableVertexAttribArray(currentProgram.vertexColorAttribute);
 
-    currentProgram.pMatrixUniform = gl.getUniformLocation(currentProgram, "uPMatrix");
-    currentProgram.mvMatrixUniform = gl.getUniformLocation(currentProgram, "uMVMatrix");
+    currentProgram.pMatrixUniform = gl.getUniformLocation(currentProgram, 'uPMatrix');
+    currentProgram.mvMatrixUniform = gl.getUniformLocation(currentProgram, 'uMVMatrix');
   }
 
   function initLocalFileLoad() {
-    $(".property-name:contains(pgn) ~ .c").html('<input type="file" id="filename" />');
-    $("#filename").on('change', handleFileSelect);
+    $('.property-name:contains(pgn) ~ .c').html('<input type="file" id="filename" />');
+    $('#filename').on('change', handleFileSelect);
   }
 
   function initStats() {
