@@ -11,10 +11,7 @@ ChessPiece.prototype = new BaseObject();
 ChessPiece.prototype.constructor = ChessPiece;
 
 ChessPiece.prototype.onLoad = function(_, contents) {
+  this.loadModelFromObj(contents);
+  this.initBuffers();
   this.loaded = true;
-  // console.log("loaded: " + _);
-};
-
-ChessPiece.prototype.render = function() {
-
 };
