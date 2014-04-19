@@ -27,7 +27,7 @@ var ChessPlayer = (function() {
       projection: 'perspective',
       shadows: false,
       wireframe: false,
-      lightning: true,
+      lightning: false,
       resolution: 2
     }
   };
@@ -145,21 +145,23 @@ var ChessPlayer = (function() {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100.0);
+    if (properties.scene.projection === 'perspective') {
+      mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100);
+    } else {
+      mat4.ortho(pMatrix, 0, gl.viewportWidth, 0, gl.viewportHeight, 1, 100);
+    }
 
     gl.useProgram(currentProgram);
 
     // gl.uniform1f(gl.getUniformLocation(currentProgram, 'time'), parameters.time / 1000);
     // gl.uniform2f(gl.getUniformLocation(currentProgram, 'resolution'), parameters.screenWidth, parameters.screenHeight);
 
-
-
     for (var i = scene.length - 1; i >= 0; i--) {
       obj = scene[i];
 
       mat4.identity(mvMatrix);
+      mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, -1, -5));
       mat4.translate(mvMatrix, mvMatrix, obj.position);
-      mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, 0, -3));
       setMatrixUniforms();
       obj.render();
     }
