@@ -12,33 +12,6 @@
 
     <canvas></canvas>
 
-    <script id="vs" type="x-shader/vertex">
-      float PI = 3.14159265358979323846264;
-
-      attribute vec3 aVertexPosition;
-      attribute vec4 aVertexColor;
-      uniform mat4 uMVMatrix;
-      uniform mat4 uPMatrix;
-      varying vec4 vColor;
-
-      void main() {
-        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-        vColor = aVertexColor;
-      }
-    </script>
-
-    <script id="fs" type="x-shader/fragment">
-      precision mediump float;
-
-      uniform vec2 resolution;
-
-      varying vec4 vColor;
-
-      void main(void) {
-        gl_FragColor = vColor;
-      }
-    </script>
-
     <script type="text/javascript" src="js/requestAnimationFrame.js"></script>
     <script type="text/javascript" src="js/gl-matrix-min.js"></script>
     <script type="text/javascript" src="js/underscore-min.js"></script>

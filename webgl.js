@@ -6,9 +6,6 @@ var WebGL = (function() {
   var vertexShader, fragmentShader;
 
   function initWebGL() {
-    vertexShader = document.getElementById('vs').textContent;
-    fragmentShader = document.getElementById('fs').textContent;
-
     canvas = document.querySelector('canvas');
 
     try {
@@ -22,7 +19,7 @@ var WebGL = (function() {
       console.error('cannot create webgl context');
     }
 
-    currentProgram = createProgram(vertexShader, fragmentShader);
+    currentProgram = initShaders('assets/shaders/shader.vsh', 'assets/shaders/shader.fsh');
 
     onWindowResize();
     window.addEventListener('resize', _.debounce(onWindowResize, 300, false), false);
@@ -31,43 +28,43 @@ var WebGL = (function() {
     gl.enable(gl.DEPTH_TEST);
   }
 
-  function createProgram(vertex, fragment) {
-    var program = gl.createProgram();
-
-    var vs = createShader(vertex, gl.VERTEX_SHADER);
-    var fs = createShader('#ifdef GL_ES\nprecision highp float;\n#endif\n\n' + fragment, gl.FRAGMENT_SHADER);
-
-    if (vs === null || fs === null) return null;
-
-    gl.attachShader(program, vs);
-    gl.attachShader(program, fs);
-
-    gl.deleteShader(vs);
-    gl.deleteShader(fs);
-
-    gl.linkProgram(program);
-
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error('VALIDATE_STATUS: ' + gl.getProgramParameter(program, gl.VALIDATE_STATUS) + '\n' +
-                    'ERROR: ' + gl.getError() + '\n\n' +
-                    '- Vertex Shader -\n' + vertex + '\n\n' +
-                    '- Fragment Shader -\n' + fragment);
-      return null;
-    }
-    return program;
+  function loadFileAJAX(name) {
+      var xhr = new XMLHttpRequest(),
+          okStatus = document.location.protocol === 'file:' ? 0 : 200;
+      xhr.open('GET', name, false);
+      xhr.send(null);
+      return xhr.status == okStatus ? xhr.responseText : null;
   }
 
-  function createShader(src, type) {
-    var shader = gl.createShader(type);
+  function initShaders(vShaderName, fShaderName) {
+      function getShader(shaderName, type) {
+          var shader = gl.createShader(type),
+              shaderScript = loadFileAJAX(shaderName);
+          if (!shaderScript) {
+              alert('Could not find shader source: '+ shaderName);
+          }
+          gl.shaderSource(shader, shaderScript);
+          gl.compileShader(shader);
 
-    gl.shaderSource(shader, src);
-    gl.compileShader(shader);
+          if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+              alert(gl.getShaderInfoLog(shader));
+              return null;
+          }
+          return shader;
+      }
+      var vertexShader = getShader(vShaderName, gl.VERTEX_SHADER),
+          fragmentShader = getShader(fShaderName, gl.FRAGMENT_SHADER),
+          program = gl.createProgram();
 
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.error((type == gl.VERTEX_SHADER ? 'VERTEX' : 'FRAGMENT') + ' SHADER:\n' + gl.getShaderInfoLog(shader));
-      return null;
-    }
-    return shader;
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+          alert('Could not initialise shaders');
+          return null;
+      }
+      return program;
   }
 
   function onWindowResize(event) {
