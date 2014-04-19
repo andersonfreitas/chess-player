@@ -6,6 +6,8 @@ var WebGL = (function() {
   var vertexShader, fragmentShader;
 
   function initWebGL() {
+    glMatrix.setMatrixArrayType(Array);
+
     canvas = document.querySelector('canvas');
 
     try {
@@ -75,12 +77,7 @@ var WebGL = (function() {
     gl.viewportHeight = canvas.height;
   }
 
-  function init() {
-    glMatrix.setMatrixArrayType(Array);
-    initWebGL();
-  }
-
   return {
-    init: init
+    init: initWebGL
   };
 })();
