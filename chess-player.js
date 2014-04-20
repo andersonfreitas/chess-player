@@ -27,7 +27,7 @@ var ChessPlayer = (function() {
       projection: 'perspective',
       shadows: false,
       wireframe: false,
-      lightning: false,
+      lightning: true,
       resolution: 2
     }
   };
@@ -170,6 +170,8 @@ var ChessPlayer = (function() {
 
     // gl.uniform1f(gl.getUniformLocation(currentProgram, 'time'), parameters.time / 1000);
     // gl.uniform2f(gl.getUniformLocation(currentProgram, 'resolution'), parameters.screenWidth, parameters.screenHeight);
+
+    gl.uniform1i(gl.getUniformLocation(currentProgram, 'enableLight'), properties.scene.lightning);
 
     for (var i = scene.length - 1; i >= 0; i--) {
       obj = scene[i];
