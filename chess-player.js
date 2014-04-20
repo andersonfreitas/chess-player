@@ -28,7 +28,8 @@ var ChessPlayer = (function() {
       shadows: false,
       wireframe: false,
       lightning: true,
-      resolution: 2
+      resolution: 2,
+      diffuse: '#ccc'
     }
   };
 
@@ -51,9 +52,15 @@ var ChessPlayer = (function() {
       wireframe: folders.scene.add(properties.scene, 'wireframe'),
       lightning: folders.scene.add(properties.scene, 'lightning'),
       shadows: folders.scene.add(properties.scene, 'shadows'),
-      resolution: folders.scene.add(properties.scene, 'resolution', { low: 1, medium: 2, high: 3 })
+      resolution: folders.scene.add(properties.scene, 'resolution', { low: 1, medium: 2, high: 3 }),
+      diffuse: folders.scene.addColor(properties.scene, 'diffuse')
     }
   };
+
+  controllers.scene.diffuse.onChange(function(value) {
+    var color = Utils.hexToRgb(value);
+    gl.uniform3f(currentProgram.u_DiffuseLight, color.r, color.g, color.b);
+  });
 
   var scene = [];
   var game = {};
