@@ -2,15 +2,18 @@ function BaseObject() {
   this.position = vec3.create();
 
   this.vertexBuffer = 0;
-  this.indexBuffer = 0;
-  this.colorBuffer = 0;
   this.normalBuffer = 0;
+  this.colorBuffer = 0;
+  this.indexBuffer = 0;
+
+  this.normalsBase = [];
+  this.verticesBase = [];
+  this.colorsBase = [];
 
   this.vertices = [];
-  this.vertexColors = [];
+  this.colors = [];
   this.normals = [];
   this.indices = [];
-  this.indicesNormal = [];
 }
 
 BaseObject.prototype.initBuffers = function() {
@@ -26,20 +29,21 @@ BaseObject.prototype.initBuffers = function() {
 
   this.colorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(_.flatten(this.vertexColors)), gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(_.flatten(this.colors)), gl.STATIC_DRAW);
   this.colorBuffer.itemSize = 4;
-  this.colorBuffer.numItems = this.vertexColors.length;
+  this.colorBuffer.numItems = this.colors.length;
 
-  // this.normalBuffer = gl.createBuffer();
-  // gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
-  // gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(_.flatten(this.normals)), gl.STATIC_DRAW);
-  // this.colorBuffer.itemSize = 3;
-  // this.colorBuffer.numItems = this.normals.length;
+  this.normalBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(_.flatten(this.normals)), gl.STATIC_DRAW);
+  this.normalBuffer.itemSize = 3;
+  this.normalBuffer.numItems = this.normals.length;
 }
 
 BaseObject.prototype.loadModelFromObj = function(dados) {
   var linhas = dados.split('\n');
 
+  var indexIndices = 0;
   for (var indice in linhas) {
     var linha = linhas[indice];
     var parte = linha.substring(0, 2);
@@ -51,8 +55,8 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       var vy = parseFloat(vertice[2]);
       var vz = parseFloat(vertice[3]);
 
-      this.vertices.push(vec3.fromValues(vx, vy, vz));
-      this.vertexColors.push(vec4.fromValues(0.22, 0.73, 0.88, 1.0));
+      this.verticesBase.push(vec3.fromValues(vx, vy, vz));
+      this.colorsBase.push(vec4.fromValues(0.22, 0.73, 0.88, 1.0));
     } else if (parte == 'vn') {
       var normal = linha.match(/(-?\d*\.?\d+)\s+(-?\d*\.?\d+)\s+(-?\d*\.?\d+)/);
 
@@ -60,7 +64,7 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       var vny = parseFloat(normal[2]);
       var vnz = parseFloat(normal[3]);
 
-      this.normals.push(vec3.fromValues(vnx, vny, vnz));
+      this.normalsBase.push(vec3.fromValues(vnx, vny, vnz));
     } else if (parte == 'f ') {
       var indices0 = (linha.substring(2)).split(' ');
 
@@ -68,15 +72,27 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       var i2 = parseInt((indices0[1].substring(0)).split('//')[0]);
       var i3 = parseInt((indices0[2].substring(0)).split('//')[0]);
 
-      this.indices.push(i1 - 1, i2 - 1, i3 - 1);
+      this.indices.push(indexIndices++, indexIndices++, indexIndices++);
+      // this.indices.push(i1 - 1, i2 - 1, i3 - 1);
 
-      var indices0 = (linha.substring(2)).split(' ');
+      this.vertices.push(this.verticesBase[i1 - 1], this.verticesBase[i2 - 1], this.verticesBase[i3 - 1]);
+      this.colors.push(this.colorsBase[i1 - 1], this.colorsBase[i2 - 1], this.colorsBase[i3 - 1]);
+
       var in1 = parseInt((indices0[0].substring(0)).split('//')[1]);
       var in2 = parseInt((indices0[1].substring(0)).split('//')[1]);
       var in3 = parseInt((indices0[2].substring(0)).split('//')[1]);
-      this.indicesNormal.push(in1 - 1, in2 - 1, in3 - 1);
+      // this.indicesNormal.push(in1 - 1, in2 - 1, in3 - 1);
+
+      this.normals.push(this.normalsBase[in1 -1], this.normalsBase[in2 -1], this.normalsBase[in3 -1]);
     }
   }
+  console.log(
+    "Vertices: ", _.flatten(this.vertices).length,
+    "Normals: ", _.flatten(this.normals).length,
+    "Colors: ", _.flatten(this.colors).length,
+    "Normals Base: ", _.flatten(this.normalsBase).length,
+    "Indices: ", this.indices.length
+  );
 }
 
 BaseObject.prototype.render = function() {
@@ -88,6 +104,9 @@ BaseObject.prototype.render = function() {
 
   gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
   gl.vertexAttribPointer(currentProgram.vertexColorAttribute, this.colorBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, this.normalBuffer);
+  gl.vertexAttribPointer(currentProgram.vertexNormalAttribute, this.normalBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
 
