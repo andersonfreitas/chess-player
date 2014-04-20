@@ -8,9 +8,9 @@ uniform bool enableLight;
 
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
-vec3 u_DiffuseLight = vec3(1.0, 1.0, 1.0);
-vec3 u_LightDirection = vec3(-0.250, -0.250, 1.0);
-/*uniform*/ vec3 u_AmbientLight = vec3(0.2, 0.2, 0.2);
+uniform vec3 u_DiffuseLight;
+uniform vec3 u_LightDirection;
+uniform vec3 u_AmbientLight;
 varying vec4 vColor;
 
 void main() {
