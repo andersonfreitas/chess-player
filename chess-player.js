@@ -120,8 +120,23 @@ var ChessPlayer = (function() {
     currentProgram.vertexColorAttribute = gl.getAttribLocation(currentProgram, 'aVertexColor');
     gl.enableVertexAttribArray(currentProgram.vertexColorAttribute);
 
+    currentProgram.vertexNormalAttribute = gl.getAttribLocation(currentProgram, 'aVertexNormal');
+    gl.enableVertexAttribArray(currentProgram.vertexNormalAttribute);
+
     currentProgram.pMatrixUniform = gl.getUniformLocation(currentProgram, 'uPMatrix');
     currentProgram.mvMatrixUniform = gl.getUniformLocation(currentProgram, 'uMVMatrix');
+
+    // currentProgram.u_DiffuseLight = gl.getUniformLocation(currentProgram, 'u_DiffuseLight');
+    // currentProgram.u_LightDirection = gl.getUniformLocation(currentProgram, 'u_LightDirection');
+    // currentProgram.u_AmbientLight = gl.getUniformLocation(currentProgram, 'u_AmbientLight');
+
+    // gl.uniform3f(currentProgram.u_DiffuseLight, 0.1, 0.0, 0.1);
+
+    // var lightDirection = vec3.fromValues(-0.250, -0.250, 1.0);
+    // vec3.normalize(lightDirection, lightDirection);
+    // gl.uniform3fv(currentProgram.u_LightDirection, _.flatten(lightDirection));
+
+    // gl.uniform3f(currentProgram.u_AmbientLight, 0.2, 0.2, 0.2);
   }
 
   function initLocalFileLoad() {
@@ -160,7 +175,7 @@ var ChessPlayer = (function() {
       obj = scene[i];
 
       mat4.identity(mvMatrix);
-      mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, -1, -5));
+      mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, 0, -3));
       mat4.translate(mvMatrix, mvMatrix, obj.position);
       setMatrixUniforms();
       obj.render();
