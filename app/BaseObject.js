@@ -52,7 +52,7 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       var vz = parseFloat(vertice[3]);
 
       this.vertices.push(vec3.fromValues(vx, vy, vz));
-      this.vertexColors.push(vec4.fromValues(1.0, 0.0, 0.0, 1.0));
+      this.vertexColors.push(vec4.fromValues(0.22, 0.73, 0.88, 1.0));
     } else if (parte == 'vn') {
       var normal = linha.match(/(-?\d*\.?\d+)\s+(-?\d*\.?\d+)\s+(-?\d*\.?\d+)/);
 
@@ -64,16 +64,12 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
     } else if (parte == 'f ') {
       var indices0 = (linha.substring(2)).split(' ');
 
-      // console.log(indices0);
-
       var i1 = parseInt((indices0[0].substring(0)).split('//')[0]);
       var i2 = parseInt((indices0[1].substring(0)).split('//')[0]);
       var i3 = parseInt((indices0[2].substring(0)).split('//')[0]);
 
-      // console.log(i1, i2, i3);
-
       this.indices.push(i1 - 1, i2 - 1, i3 - 1);
-    } else if (parte == 'f ') {
+
       var indices0 = (linha.substring(2)).split(' ');
       var in1 = parseInt((indices0[0].substring(0)).split('//')[1]);
       var in2 = parseInt((indices0[1].substring(0)).split('//')[1]);
