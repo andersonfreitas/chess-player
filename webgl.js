@@ -43,7 +43,7 @@ var WebGL = (function() {
           var shader = gl.createShader(type),
               shaderScript = loadFileAJAX(shaderName);
           if (!shaderScript) {
-              alert('Could not find shader source: '+ shaderName);
+              alert('Could not find shader source: ' + shaderName);
           }
           gl.shaderSource(shader, shaderScript);
           gl.compileShader(shader);

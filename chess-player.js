@@ -67,7 +67,7 @@ var ChessPlayer = (function() {
 
   function initScene() {
     var x = 0;
-    function addToScene(object) { scene.push(object); object.position = vec3.fromValues(-2.50 + x, 0,0); x += 0.5; return object; }
+    function addToScene(object) { scene.push(object); object.position = vec3.fromValues(-2.50 + x, 0, 0); x += 0.5; return object; }
 
     this.game = {
       // board: addToScene(new Board()),

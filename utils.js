@@ -36,21 +36,21 @@
 
   Utils.map = function(value, start1, stop1, start2, stop2) {
     return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
-  }
+  };
 
-  Utils.mix = function( u, v, s ) {
-    if ( typeof s !== "number" ) {
-      throw "mix: the last parameter " + s + " must be a number";
+  Utils.mix = function(u, v, s ) {
+    if (typeof s !== 'number') {
+      throw 'mix: the last parameter ' + s + ' must be a number';
     }
-    if ( u.length != v.length ) {
-      throw "vector dimension mismatch";
+    if (u.length != v.length) {
+      throw 'vector dimension mismatch';
     }
     var result = [];
-    for ( var i = 0; i < u.length; ++i ) {
-      result.push( s * u[i] + (1.0 - s) * v[i] );
+    for (var i = 0; i < u.length; ++i) {
+      result.push(s * u[i] + (1.0 - s) * v[i]);
     }
     return result;
-  }
+  };
 
   Utils.hexToRgb = function(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -65,6 +65,6 @@
       g: Utils.map(parseInt(result[2], 16), 0, 255, 0, 1),
       b: Utils.map(parseInt(result[3], 16), 0, 255, 0, 1)
     } : null;
-  }
+  };
 
 }).call(this);
