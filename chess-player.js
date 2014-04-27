@@ -31,7 +31,7 @@ var ChessPlayer = (function() {
     game: {
       pgn: 'sample.pgn',
       reload: function() { console.log('Reloading PGN from file... ' + properties.game.pgn); },
-      autoplay: false,
+      autoplay: true,
       next: function() { console.log('Playing NEXT move from PGN...'); },
       previous: function() { console.log('Playing PREVIOUS move from PGN...'); },
       paused: false,
