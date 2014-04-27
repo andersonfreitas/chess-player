@@ -56,7 +56,7 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       var vz = parseFloat(vertice[3]);
 
       this.verticesBase.push(vec3.fromValues(vx, vy, vz));
-      this.colorsBase.push(vec4.fromValues(0.22, 0.73, 0.88, 1.0));
+      this.colorsBase.push(vec4.fromValues(1.0, 1.0, 1.0, 1.0));
     } else if (parte == 'vn') {
       var normal = linha.match(/(-?\d*\.?\d+)\s+(-?\d*\.?\d+)\s+(-?\d*\.?\d+)/);
 
@@ -86,7 +86,7 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       this.normals.push(this.normalsBase[in1 - 1], this.normalsBase[in2 - 1], this.normalsBase[in3 - 1]);
     }
   }
-  console.log(
+  console.debug(
     'Vertices: ', _.flatten(this.vertices).length,
     'Normals: ', _.flatten(this.normals).length,
     'Colors: ', _.flatten(this.colors).length,
