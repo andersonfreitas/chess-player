@@ -1,3 +1,6 @@
+// Math!
+var π = Math.PI, τ = π * 2;
+
 (function() {
 
   var Utils = { };

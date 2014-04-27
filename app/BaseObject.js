@@ -1,5 +1,6 @@
 function BaseObject() {
   this.position = vec3.create();
+  this.rotation = vec3.create();
 
   this.vertexBuffer = 0;
   this.normalBuffer = 0;
@@ -117,6 +118,3 @@ BaseObject.prototype.render = function() {
     gl.drawElements(gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0);
   }
 };
-
-// animateTo(pos, timing, easingFunction)
-// tick() -- update animation position

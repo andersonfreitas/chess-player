@@ -236,6 +236,7 @@ var ChessPlayer = (function() {
 
       mvPushMatrix();
       mat4.translate(mvMatrix, mvMatrix, obj.position);
+      mat4.rotateY(mvMatrix, mvMatrix, obj.rotation[1]*π/180);
       setMatrixUniforms();
 
       obj.render();
