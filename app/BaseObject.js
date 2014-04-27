@@ -15,6 +15,8 @@ function BaseObject() {
   this.normals = [];
   this.indices = [];
 
+  this.color = vec4.fromValues(1.0, 1.0, 1.0, 1.0)
+
   this.animationTime = 0;
 }
 
@@ -62,7 +64,7 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       var vz = parseFloat(vertice[3]) * 1.3;
 
       this.verticesBase.push(vec3.fromValues(vx, vy, vz));
-      this.colorsBase.push(vec4.fromValues(1.0, 1.0, 1.0, 1.0));
+      this.colorsBase.push(this.color);
     } else if (parte == 'vn') {
       var normal = linha.match(/(-?\d*\.?\d+)\s+(-?\d*\.?\d+)\s+(-?\d*\.?\d+)/);
 

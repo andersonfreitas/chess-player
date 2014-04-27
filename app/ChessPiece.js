@@ -1,7 +1,9 @@
-function ChessPiece(file) {
+function ChessPiece(file, color) {
   BaseObject.call(this);
 
   this.loaded = false;
+
+  this.color = color;
 
   Utils.loadRemoteFile(this, 'assets/obj/' + file + '.obj', this.onLoad);
 

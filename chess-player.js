@@ -90,53 +90,64 @@ var ChessPlayer = (function() {
     var x = 0;
     function addToScene(object) { scene.push(object); return object; }
 
+    var blackColor = vec4.fromValues(0.2, 0.2, 0.2, 1.0);
+    var whiteColor = vec4.fromValues(1.0, 1.0, 1.0, 1.0);
+
     game = {
       board: addToScene(new Board()),
 
     //   // one king, one queen, two rooks, two knights, two bishops, and eight pawns
       black: {
-        king: addToScene(new ChessPiece('rei')),
-        queen: addToScene(new ChessPiece('rainha')),
+        king: addToScene(new ChessPiece('rei', blackColor)),
+        queen: addToScene(new ChessPiece('rainha', blackColor)),
         rooks: [
-          addToScene(new ChessPiece('torre')),
-          addToScene(new ChessPiece('torre'))
+          addToScene(new ChessPiece('torre', blackColor)),
+          addToScene(new ChessPiece('torre', blackColor))
         ],
         knights: [
-          addToScene(new ChessPiece('cavalo')),
-          addToScene(new ChessPiece('cavalo'))
+          addToScene(new ChessPiece('cavalo', blackColor)),
+          addToScene(new ChessPiece('cavalo', blackColor))
         ],
         bishops: [
-          addToScene(new ChessPiece('bispo')),
-          addToScene(new ChessPiece('bispo'))
+          addToScene(new ChessPiece('bispo', blackColor)),
+          addToScene(new ChessPiece('bispo', blackColor))
         ],
         pawns: [
-          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
-          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
-          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
-          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao'))
+          addToScene(new ChessPiece('peao', blackColor)),
+          addToScene(new ChessPiece('peao', blackColor)),
+          addToScene(new ChessPiece('peao', blackColor)),
+          addToScene(new ChessPiece('peao', blackColor)),
+          addToScene(new ChessPiece('peao', blackColor)),
+          addToScene(new ChessPiece('peao', blackColor)),
+          addToScene(new ChessPiece('peao', blackColor)),
+          addToScene(new ChessPiece('peao', blackColor))
         ]
       },
 
       white: {
-        king: addToScene(new ChessPiece('rei')),
-        queen: addToScene(new ChessPiece('rainha')),
+        king: addToScene(new ChessPiece('rei'), whiteColor),
+        queen: addToScene(new ChessPiece('rainha', whiteColor)),
         rooks: [
-          addToScene(new ChessPiece('torre')),
-          addToScene(new ChessPiece('torre'))
+          addToScene(new ChessPiece('torre', whiteColor)),
+          addToScene(new ChessPiece('torre', whiteColor))
         ],
         knights: [
-          addToScene(new ChessPiece('cavalo')),
-          addToScene(new ChessPiece('cavalo'))
+          addToScene(new ChessPiece('cavalo', whiteColor)),
+          addToScene(new ChessPiece('cavalo', whiteColor))
         ],
         bishops: [
-          addToScene(new ChessPiece('bispo')),
-          addToScene(new ChessPiece('bispo'))
+          addToScene(new ChessPiece('bispo', whiteColor)),
+          addToScene(new ChessPiece('bispo', whiteColor))
         ],
         pawns: [
-          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
-          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
-          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
-          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao'))
+          addToScene(new ChessPiece('peao', whiteColor)),
+          addToScene(new ChessPiece('peao', whiteColor)),
+          addToScene(new ChessPiece('peao', whiteColor)),
+          addToScene(new ChessPiece('peao', whiteColor)),
+          addToScene(new ChessPiece('peao', whiteColor)),
+          addToScene(new ChessPiece('peao', whiteColor)),
+          addToScene(new ChessPiece('peao', whiteColor)),
+          addToScene(new ChessPiece('peao', whiteColor))
         ]
       }
     };
