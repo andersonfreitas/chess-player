@@ -182,9 +182,10 @@ var ChessPlayer = (function() {
     currentProgram.u_LightDirection = gl.getUniformLocation(currentProgram, 'u_LightDirection');
     currentProgram.u_AmbientLight = gl.getUniformLocation(currentProgram, 'u_AmbientLight');
 
-    gl.uniform3f(currentProgram.u_DiffuseLight, 1.0, 1.0, 1.0);
+    var color = Utils.hexToRgb('#ccc');
+    gl.uniform3f(currentProgram.u_DiffuseLight, color.r, color.g, color.b);
 
-    var lightDirection = vec3.fromValues(-0.250, -0.250, 1.0);
+    var lightDirection = vec3.fromValues(1, 1, 0);
     vec3.normalize(lightDirection, lightDirection);
     gl.uniform3fv(currentProgram.u_LightDirection, _.flatten(lightDirection));
 
@@ -231,10 +232,22 @@ var ChessPlayer = (function() {
   }
 
   function setupCameraPosition() {
+    // mat4.identity(mvMatrix);
+
+    eye = vec3.fromValues(1.5, 6, -6);
+    at = vec3.fromValues(1.5, 3, 0);
+    up = vec3.fromValues(0, 1, 0);
+    mat4.lookAt(mvMatrix, eye, at, up);
+  }
+
+  function lookAt(eye, at) {
     mat4.identity(mvMatrix);
 
-    mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, 0, -3));
-    mat4.lookAt(mvMatrix, vec3.fromValues(0, 3, 6), vec3.fromValues(1, 0, 0), vec3.fromValues(0,1,0))
+    eye = vec3.fromValues(eye[0], eye[1], eye[2]);
+    at = vec3.fromValues(at[0], at[1], at[2]);
+    up = vec3.fromValues(0, 1, 0);
+
+    mat4.lookAt(mvMatrix, eye, at, up);
   }
 
   function updateAnimationTime() {
@@ -289,6 +302,9 @@ var ChessPlayer = (function() {
   return {
     init: init,
     initScene: initScene,
-    properties: properties
+    scene: function() { return scene; },
+    game: function() { return game; },
+    properties: properties,
+    lookAt: lookAt
   };
 })();
