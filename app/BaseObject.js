@@ -16,7 +16,7 @@ function BaseObject() {
   this.normals = [];
   this.indices = [];
 
-  this.color = vec4.fromValues(1.0, 1.0, 1.0, 1.0)
+  this.color = vec4.fromValues(1.0, 1.0, 1.0, 1.0);
 
   this.animationTime = 0;
 }
@@ -24,11 +24,11 @@ function BaseObject() {
 BaseObject.prototype.rotate = function(rotation) {
   this.rotation = rotation;
   return this;
-}
+};
 
 BaseObject.prototype.updateAnimation = function(elapsed) {
   this.animationTime += elapsed;
-}
+};
 
 BaseObject.prototype.initBuffers = function() {
   this.indexBuffer = gl.createBuffer();

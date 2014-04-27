@@ -1,6 +1,6 @@
 var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
-var slots = []
+var slots = [];
 for (var rank = 1; rank <= 8; rank++) {
   for (var column = 0; column < 8; column++) {
     if (rank > 2 && rank < 7)
