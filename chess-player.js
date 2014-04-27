@@ -69,6 +69,10 @@ var ChessPlayer = (function() {
       diffuse: folders.scene.addColor(properties.scene, 'diffuse')
     }
   };
+  controllers.game.autoplay.onChange(function(value) {
+    if (value)
+      randomMove();
+  });
 
   controllers.scene.lightning.onChange(function(value) {
     updateLightning(value);

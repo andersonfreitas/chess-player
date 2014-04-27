@@ -13,18 +13,21 @@ for (var rank = 1; rank <= 8; rank++) {
 $(document).ready(function() {
   ChessPlayer.init();
 
-  function randomMove() {
-    obj = _.sample(_.rest(ChessPlayer.scene(), 1));
 
-    freePositions = _.where(slots, { used: false });
-    sampled = _.sample(freePositions);
-    sampled.used = true;
-    _.findWhere(slots, { pos: obj.positionName }).used = false;
-
-    obj.animateMoveTo(sampled.pos, 500);
-
-    window.setTimeout(randomMove, 2000);
-  }
-
-  // window.setTimeout(randomMove, 4000);
+  if (ChessPlayer.properties.game.autoplay)
+    window.setTimeout(randomMove, 4000);
 });
+
+function randomMove() {
+  obj = _.sample(_.rest(ChessPlayer.scene(), 1));
+
+  freePositions = _.where(slots, { used: false });
+  sampled = _.sample(freePositions);
+  sampled.used = true;
+  _.findWhere(slots, { pos: obj.positionName }).used = false;
+
+  obj.animateMoveTo(sampled.pos, 500);
+
+  if (ChessPlayer.properties.game.autoplay)
+    window.setTimeout(randomMove, 2000);
+}
