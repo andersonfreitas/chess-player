@@ -25,7 +25,7 @@
     [X] Desenhar um tabuleiro
         [ ] Mapear a textura em um cubo
         [ ] Desenhar base do tabuleiro
-    [ ] Ajustas orientação das peças (ex.: os cavalos devem se encarar!)
+    [X] Ajustar orientação das peças (ex.: os cavalos devem se encarar!)
     [X] cena sempre centralizada no viewport
     [X] reajustes ao redimensionar a janela
     [ ] Trackball virtual

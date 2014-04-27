@@ -305,14 +305,14 @@ var ChessPlayer = (function() {
   // first row: rook, knight, bishop, queen, king, bishop, knight, and rook;
   // second row: pawns
   function positionPieces() {
-    game.black.rooks[0].moveTo('1a')
-    game.black.knights[0].moveTo('1b')
-    game.black.bishops[0].moveTo('1c')
-    game.black.queen.moveTo('1d')
-    game.black.king.moveTo('1e')
-    game.black.bishops[1].moveTo('1f')
-    game.black.knights[1].moveTo('1g')
-    game.black.rooks[1].moveTo('1h')
+    game.black.rooks[0].moveTo('1a');
+    game.black.knights[0].moveTo('1b');
+    game.black.bishops[0].moveTo('1c');
+    game.black.queen.moveTo('1d');
+    game.black.king.moveTo('1e');
+    game.black.bishops[1].moveTo('1f');
+    game.black.knights[1].moveTo('1g');
+    game.black.rooks[1].moveTo('1h');
 
     var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     for (var i = 0; i < game.black.pawns.length; i++) {
@@ -320,14 +320,18 @@ var ChessPlayer = (function() {
       pawn.moveTo('2' + columns[i]);
     };
 
-    game.white.rooks[0].moveTo('8a')
-    game.white.knights[0].moveTo('8b')
-    game.white.bishops[0].moveTo('8c')
-    game.white.queen.moveTo('8d')
-    game.white.king.moveTo('8e')
-    game.white.bishops[1].moveTo('8f')
-    game.white.knights[1].moveTo('8g')
-    game.white.rooks[1].moveTo('8h')
+    // rotacionado todas as peças pretas para ficarem de frente para a camera
+    _.invoke(_.flatten(ChessPlayer.game().black), 'rotate', [0, 180, 0]);
+    game.black.king.rotate([0, 90, 0]);
+
+    game.white.rooks[0].moveTo('8a');
+    game.white.knights[0].moveTo('8b');
+    game.white.bishops[0].moveTo('8c');
+    game.white.queen.moveTo('8d');
+    game.white.king.moveTo('8e').rotate([0, 90, 0]);
+    game.white.bishops[1].moveTo('8f');
+    game.white.knights[1].moveTo('8g');
+    game.white.rooks[1].moveTo('8h');
 
     var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     for (var i = 0; i < game.white.pawns.length; i++) {
