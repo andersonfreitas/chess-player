@@ -38,7 +38,7 @@ BaseObject.prototype.initBuffers = function() {
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(_.flatten(this.normals)), gl.STATIC_DRAW);
   this.normalBuffer.itemSize = 3;
   this.normalBuffer.numItems = this.normals.length;
-}
+};
 
 BaseObject.prototype.loadModelFromObj = function(dados) {
   var linhas = dados.split('\n');
@@ -83,17 +83,17 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       var in3 = parseInt((indices0[2].substring(0)).split('//')[1]);
       // this.indicesNormal.push(in1 - 1, in2 - 1, in3 - 1);
 
-      this.normals.push(this.normalsBase[in1 -1], this.normalsBase[in2 -1], this.normalsBase[in3 -1]);
+      this.normals.push(this.normalsBase[in1 - 1], this.normalsBase[in2 - 1], this.normalsBase[in3 - 1]);
     }
   }
   console.log(
-    "Vertices: ", _.flatten(this.vertices).length,
-    "Normals: ", _.flatten(this.normals).length,
-    "Colors: ", _.flatten(this.colors).length,
-    "Normals Base: ", _.flatten(this.normalsBase).length,
-    "Indices: ", this.indices.length
+    'Vertices: ', _.flatten(this.vertices).length,
+    'Normals: ', _.flatten(this.normals).length,
+    'Colors: ', _.flatten(this.colors).length,
+    'Normals Base: ', _.flatten(this.normalsBase).length,
+    'Indices: ', this.indices.length
   );
-}
+};
 
 BaseObject.prototype.render = function() {
   if (this.vertexBuffer === 0)
@@ -115,7 +115,7 @@ BaseObject.prototype.render = function() {
   } else {
     gl.drawElements(gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0);
   }
-}
+};
 
 // animateTo(pos, timing, easingFunction)
 // tick() -- update animation position
