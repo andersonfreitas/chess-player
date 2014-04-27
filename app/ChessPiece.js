@@ -29,8 +29,6 @@ ChessPiece.prototype.moveTo = function(pos) {
   this.position = this.positions[pos];
 }
 
-
-///////////////////////////////////
 function lerp(a, b, t) {
   return [ a[0]+(b[0]-a[0])*t || 0, a[1]+(b[1]-a[1])*t || 0,  a[2]+(b[2]-a[2])*t || 0 ];
 }
@@ -43,6 +41,9 @@ ChessPiece.prototype.animateMoveTo = function(pos, duration) {
   this.animating = true;
 }
 
+/**
+ * Animando com uma curva bezier quadrática
+ */
 ChessPiece.prototype.updateAnimation = function(elapsed) {
   this.animationTime += elapsed;
 
@@ -55,8 +56,11 @@ ChessPiece.prototype.updateAnimation = function(elapsed) {
     }
 
     var middle = lerp(this.lastDestination, this.destination, 0.5);
-    middle[1] = 1.0; // Y
+    middle[1] = 3.0;
 
-    this.position = lerp(this.lastDestination, this.destination, delta);
+    var a = lerp(this.lastDestination, middle, delta);
+    var b = lerp(middle, this.destination, delta);
+
+    this.position = lerp(a, b, delta);
   }
 }
