@@ -129,7 +129,7 @@ var ChessPlayer = (function() {
       },
 
       white: {
-        king: addToScene(new ChessPiece('rei'), whiteColor),
+        king: addToScene(new ChessPiece('rei', whiteColor)),
         queen: addToScene(new ChessPiece('rainha', whiteColor)),
         rooks: [
           addToScene(new ChessPiece('torre', whiteColor)),
