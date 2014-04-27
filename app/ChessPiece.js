@@ -27,6 +27,7 @@ ChessPiece.prototype.onLoad = function(_, contents) {
 
 ChessPiece.prototype.moveTo = function(pos) {
   this.position = this.positions[pos];
+  this.positionName = pos;
 }
 
 function lerp(a, b, t) {
@@ -34,6 +35,7 @@ function lerp(a, b, t) {
 }
 
 ChessPiece.prototype.animateMoveTo = function(pos, duration) {
+  this.positionName = pos;
   this.animationTime = 0;
   this.destination = this.positions[pos];
   this.lastDestination = this.position;
