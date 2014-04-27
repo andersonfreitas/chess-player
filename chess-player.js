@@ -64,8 +64,8 @@ var ChessPlayer = (function() {
       projection: folders.scene.add(properties.scene, 'projection', ['perspective', 'isometric']),
       wireframe: folders.scene.add(properties.scene, 'wireframe'),
       lightning: folders.scene.add(properties.scene, 'lightning'),
-      shadows: folders.scene.add(properties.scene, 'shadows'),
-      resolution: folders.scene.add(properties.scene, 'resolution', { low: 1, medium: 2, high: 3 }),
+      // shadows: folders.scene.add(properties.scene, 'shadows'),
+      // resolution: folders.scene.add(properties.scene, 'resolution', { low: 1, medium: 2, high: 3 }),
       diffuse: folders.scene.addColor(properties.scene, 'diffuse')
     }
   };
@@ -88,7 +88,7 @@ var ChessPlayer = (function() {
 
   function initScene() {
     var x = 0;
-    function addToScene(object) { scene.push(object); object.position = vec3.fromValues(-2.50 + x, 0, 0); x += 0.5; return object; }
+    function addToScene(object) { scene.push(object); return object; }
 
     game = {
       board: addToScene(new Board()),
@@ -140,6 +140,8 @@ var ChessPlayer = (function() {
         ]
       }
     };
+
+    positionPieces();
 
     return scene;
   }
@@ -234,8 +236,8 @@ var ChessPlayer = (function() {
   function setupCameraPosition() {
     // mat4.identity(mvMatrix);
 
-    eye = vec3.fromValues(1.5, 6, -6);
-    at = vec3.fromValues(1.5, 3, 0);
+    eye = vec3.fromValues(0, 6, -6);
+    at = vec3.fromValues(0, 3, 0);
     up = vec3.fromValues(0, 1, 0);
     mat4.lookAt(mvMatrix, eye, at, up);
   }
@@ -253,7 +255,12 @@ var ChessPlayer = (function() {
   function updateAnimationTime() {
     var timeNow = new Date().getTime();
     if (lastTime !== 0) {
-        var elapsed = timeNow - lastTime;
+      var elapsed = timeNow - lastTime;
+
+      for (var i = scene.length - 1; i >= 0; i--) {
+        obj = scene[i];
+        obj.updateAnimation(elapsed);
+      }
     }
     lastTime = timeNow;
   }
@@ -272,17 +279,51 @@ var ChessPlayer = (function() {
 
   function updateProjection(projection) {
     if (projection === 'perspective') {
+      mat4.identity(pMatrix);
       mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100);
     } else {
-      mat4.ortho(pMatrix, 0, gl.viewportWidth, 0, gl.viewportHeight, 1, 100);
+      mat4.identity(pMatrix);
+      mat4.ortho(pMatrix, 0, gl.viewportWidth, 0, gl.viewportHeight, 0, 100);
     }
   }
 
+  // Initial position,
+  // first row: rook, knight, bishop, queen, king, bishop, knight, and rook;
+  // second row: pawns
+  function positionPieces() {
+    game.black.rooks[0].moveTo('1a')
+    game.black.knights[0].moveTo('1b')
+    game.black.bishops[0].moveTo('1c')
+    game.black.queen.moveTo('1d')
+    game.black.king.moveTo('1e')
+    game.black.bishops[1].moveTo('1f')
+    game.black.knights[1].moveTo('1g')
+    game.black.rooks[1].moveTo('1h')
+
+    var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    for (var i = 0; i < game.black.pawns.length; i++) {
+      pawn = game.black.pawns[i];
+      pawn.moveTo('2' + columns[i]);
+    };
+
+    game.white.rooks[0].moveTo('8a')
+    game.white.knights[0].moveTo('8b')
+    game.white.bishops[0].moveTo('8c')
+    game.white.queen.moveTo('8d')
+    game.white.king.moveTo('8e')
+    game.white.bishops[1].moveTo('8f')
+    game.white.knights[1].moveTo('8g')
+    game.white.rooks[1].moveTo('8h')
+
+    var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    for (var i = 0; i < game.white.pawns.length; i++) {
+      pawn = game.white.pawns[i];
+      pawn.moveTo('7' + columns[i]);
+    };
+  }
+
   function init() {
-    WebGL.init(function() {
-      this.updateProjection(properties.scene.projection);
-      console.log("updating projection")
-    });
+    WebGL.init();
     initStats();
     initScene();
     initShaderVars();
@@ -292,7 +333,7 @@ var ChessPlayer = (function() {
     updateProjection('perspective');
     updateLightning(true);
 
-    folders.game.open();
+    // folders.game.open();
     folders.scene.open();
 
     animate();

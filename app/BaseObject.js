@@ -14,6 +14,12 @@ function BaseObject() {
   this.colors = [];
   this.normals = [];
   this.indices = [];
+
+  this.animationTime = 0;
+}
+
+BaseObject.prototype.updateAnimation = function(elapsed) {
+  this.animationTime += elapsed;
 }
 
 BaseObject.prototype.initBuffers = function() {
@@ -86,13 +92,6 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
       this.normals.push(this.normalsBase[in1 - 1], this.normalsBase[in2 - 1], this.normalsBase[in3 - 1]);
     }
   }
-  console.debug(
-    'Vertices: ', _.flatten(this.vertices).length,
-    'Normals: ', _.flatten(this.normals).length,
-    'Colors: ', _.flatten(this.colors).length,
-    'Normals Base: ', _.flatten(this.normalsBase).length,
-    'Indices: ', this.indices.length
-  );
 };
 
 BaseObject.prototype.render = function() {
