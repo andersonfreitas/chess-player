@@ -21,21 +21,18 @@
 
     [X] Estrutura de classes básicas para o projeto
     [X] GUI para controlar a cena
-    [X] Iluminação
+    [X] Iluminação simples
+    [ ] Implementar modelo Blinn-phong no vertex shader (smooth)
     [X] Desenhar um tabuleiro
         [ ] Mapear a textura em um cubo
         [ ] Desenhar base do tabuleiro
     [X] Ajustar orientação das peças (ex.: os cavalos devem se encarar!)
-    [X] cena sempre centralizada no viewport
-    [X] reajustes ao redimensionar a janela
+    [X] Cena sempre centralizada no viewport
+    [?] Reajustes ao redimensionar a janela
     [ ] Trackball virtual
     [ ] Zoom
-    [ ] Carregar PGN
+    [ ] Carregar PGN (http://en.wikipedia.org/wiki/Portable_Game_Notation)
         [ ] de forma com que todas as jogadas já estejam na memória
         [ ] botão next/prev. automatico.
-    [ ] Instanciar as peças de acordo com o setup inicial do PGN
+    [X] Instanciar as peças de acordo com o setup inicial
     [ ] Animar a movimentação das peças de acordo com a próxima jogada
-
-# Referencias
-
-https://github.com/supereggbert/GLGE/blob/master/src/extra/glge_wavefront.js
