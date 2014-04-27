@@ -1,7 +1,7 @@
 function Board() {
   BaseObject.call(this);
 
-  this.position = vec3.create();
+  this.position = vec3.fromValues(-4, 0, -4);
   this.createBoard();
   this.initBuffers();
 }

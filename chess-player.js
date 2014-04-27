@@ -234,10 +234,8 @@ var ChessPlayer = (function() {
   }
 
   function setupCameraPosition() {
-    // mat4.identity(mvMatrix);
-
-    eye = vec3.fromValues(0, 6, -6);
-    at = vec3.fromValues(0, 3, 0);
+    eye = vec3.fromValues(6, 6, 0);
+    at = vec3.fromValues(0, 0, 0);
     up = vec3.fromValues(0, 1, 0);
     mat4.lookAt(mvMatrix, eye, at, up);
   }

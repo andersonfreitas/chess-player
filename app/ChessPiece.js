@@ -10,7 +10,7 @@ function ChessPiece(file) {
   var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   for (var rank = 1; rank <= 8; rank++) {
     for (var column = 0; column < 8; column++) {
-      this.positions[rank + columns[column]] = vec3.fromValues(rank-0.5, 0, column + 0.5);
+      this.positions[rank + columns[column]] = vec3.fromValues(rank-0.5-4, 0, column + 0.5-4);
     }
   }
 }
