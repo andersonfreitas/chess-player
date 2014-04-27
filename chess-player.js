@@ -31,10 +31,12 @@ var ChessPlayer = (function() {
     game: {
       pgn: 'sample.pgn',
       reload: function() { console.log('Reloading PGN from file... ' + properties.game.pgn); },
-      autoplay: true,
+      autoplay: false,
       next: function() { console.log('Playing NEXT move from PGN...'); },
       previous: function() { console.log('Playing PREVIOUS move from PGN...'); },
-      paused: false
+      paused: false,
+      duration: 500,
+      delay: 1000
     },
     scene: {
       projection: 'perspective',
@@ -58,7 +60,9 @@ var ChessPlayer = (function() {
       autoplay: folders.game.add(properties.game, 'autoplay'),
       next: folders.game.add(properties.game, 'next'),
       previous: folders.game.add(properties.game, 'previous'),
-      paused: folders.game.add(properties.game, 'paused')
+      paused: folders.game.add(properties.game, 'paused'),
+      duration: folders.game.add(properties.game, 'duration'),
+      delay: folders.game.add(properties.game, 'delay')
     },
     scene: {
       projection: folders.scene.add(properties.scene, 'projection', ['perspective', 'isometric']),
@@ -94,7 +98,7 @@ var ChessPlayer = (function() {
     var x = 0;
     function addToScene(object) { scene.push(object); return object; }
 
-    var blackColor = vec4.fromValues(0.2, 0.2, 0.2, 1.0);
+    var blackColor = vec4.fromValues(0.3, 0.3, 0.3, 1.0);
     var whiteColor = vec4.fromValues(1.0, 1.0, 1.0, 1.0);
 
     game = {
@@ -273,7 +277,9 @@ var ChessPlayer = (function() {
 
       for (var i = scene.length - 1; i >= 0; i--) {
         obj = scene[i];
-        obj.updateAnimation(elapsed);
+
+        if (!properties.game.paused)
+          obj.updateAnimation(elapsed);
       }
     }
     lastTime = timeNow;

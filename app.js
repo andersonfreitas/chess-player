@@ -26,8 +26,8 @@ function randomMove() {
   sampled.used = true;
   _.findWhere(slots, { pos: obj.positionName }).used = false;
 
-  obj.animateMoveTo(sampled.pos, 500);
+  obj.animateMoveTo(sampled.pos, ChessPlayer.properties.game.duration);
 
-  if (ChessPlayer.properties.game.autoplay)
-    window.setTimeout(randomMove, 2000);
+  if (ChessPlayer.properties.game.autoplay && !ChessPlayer.properties.game.paused)
+    window.setTimeout(randomMove, ChessPlayer.properties.game.delay);
 }
