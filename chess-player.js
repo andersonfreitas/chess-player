@@ -9,6 +9,19 @@ var ChessPlayer = (function() {
   var mvMatrixStack = [];
   var pMatrix = mat4.create();
 
+  function mvPushMatrix() {
+    var copy = mat4.create();
+    mat4.copy(copy, mvMatrix);
+    mvMatrixStack.push(copy);
+  }
+
+  function mvPopMatrix() {
+    if (mvMatrixStack.length == 0) {
+      throw "Invalid popMatrix!";
+    }
+    mvMatrix = mvMatrixStack.pop();
+  }
+
   function setMatrixUniforms() {
     gl.uniformMatrix4fv(currentProgram.pMatrixUniform, false, pMatrix);
     gl.uniformMatrix4fv(currentProgram.mvMatrixUniform, false, mvMatrix);
@@ -57,9 +70,17 @@ var ChessPlayer = (function() {
     }
   };
 
+  controllers.scene.lightning.onChange(function(value) {
+    updateLightning(value);
+  });
+
   controllers.scene.diffuse.onChange(function(value) {
     var color = Utils.hexToRgb(value);
     gl.uniform3f(currentProgram.u_DiffuseLight, color.r, color.g, color.b);
+  });
+
+  controllers.scene.projection.onChange(function(value) {
+    updateProjection(value);
   });
 
   var scene = [];
@@ -168,28 +189,29 @@ var ChessPlayer = (function() {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    if (properties.scene.projection === 'perspective') {
-      mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100);
-    } else {
-      mat4.ortho(pMatrix, 0, gl.viewportWidth, 0, gl.viewportHeight, 1, 100);
-    }
-
     gl.useProgram(currentProgram);
 
     // gl.uniform1f(gl.getUniformLocation(currentProgram, 'time'), parameters.time / 1000);
     // gl.uniform2f(gl.getUniformLocation(currentProgram, 'resolution'), parameters.screenWidth, parameters.screenHeight);
 
-    gl.uniform1i(gl.getUniformLocation(currentProgram, 'enableLight'), properties.scene.lightning);
-
     for (var i = scene.length - 1; i >= 0; i--) {
       obj = scene[i];
 
-      mat4.identity(mvMatrix);
-      mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, 0, -3));
+      mvPushMatrix();
       mat4.translate(mvMatrix, mvMatrix, obj.position);
       setMatrixUniforms();
+
       obj.render();
+
+      mvPopMatrix();
     }
+  }
+
+  function setupCameraPosition() {
+    mat4.identity(mvMatrix);
+
+    mat4.translate(mvMatrix, mvMatrix, vec3.fromValues(0, 0, -3));
+    mat4.lookAt(mvMatrix, vec3.fromValues(0, 3, 6), vec3.fromValues(1, 0, 0), vec3.fromValues(0,1,0))
   }
 
   function updateAnimationTime() {
@@ -208,12 +230,31 @@ var ChessPlayer = (function() {
     stats.end();
   }
 
+  function updateLightning(enable) {
+    gl.uniform1i(gl.getUniformLocation(currentProgram, 'enableLight'), enable);
+  }
+
+  function updateProjection(projection) {
+    if (projection === 'perspective') {
+      mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100);
+    } else {
+      mat4.ortho(pMatrix, 0, gl.viewportWidth, 0, gl.viewportHeight, 1, 100);
+    }
+  }
+
   function init() {
-    WebGL.init();
+    WebGL.init(function() {
+      this.updateProjection(properties.scene.projection);
+      console.log("updating projection")
+    });
     initStats();
     initScene();
     initShaderVars();
     initLocalFileLoad();
+
+    setupCameraPosition();
+    updateProjection('perspective');
+    updateLightning(true);
 
     folders.game.open();
     folders.scene.open();
