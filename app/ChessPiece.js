@@ -30,6 +30,7 @@ ChessPiece.prototype.onLoad = function(_, contents) {
 ChessPiece.prototype.moveTo = function(pos) {
   this.position = this.positions[pos];
   this.positionName = pos;
+  return this;
 }
 
 function lerp(a, b, t) {

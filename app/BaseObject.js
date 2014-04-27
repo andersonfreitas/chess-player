@@ -21,6 +21,11 @@ function BaseObject() {
   this.animationTime = 0;
 }
 
+BaseObject.prototype.rotate = function(rotation) {
+  this.rotation = rotation;
+  return this;
+}
+
 BaseObject.prototype.updateAnimation = function(elapsed) {
   this.animationTime += elapsed;
 }
