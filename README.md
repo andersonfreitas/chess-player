@@ -4,7 +4,7 @@
     [ ] PGN carregado e interpretado corretamente
     [ ] Tabuleiro exibido corretamente (espessura, cores e quadrados)
     [ ] Peças instanciadas e posicionadas (inicialmente) corretamente
-    [X] Perspectiva e viewport atualizados ao redimensionar a janela
+    [?] Perspectiva e viewport atualizados ao redimensionar a janela (parou de funcionar)
     [?] Troca de Projeções oferecida e executada corretamente
     [X] Cena centralizada no viewport
     [?] Movimentação da câmera executado corretamente
@@ -22,7 +22,10 @@
     [X] Estrutura de classes básicas para o projeto
     [X] GUI para controlar a cena
     [X] Iluminação
-    [ ] Desenhar um tabuleiro (carregar o tabuleiro via .OBJ? ou é complicar?)
+    [X] Desenhar um tabuleiro
+        [ ] Mapear a textura em um cubo
+        [ ] Desenhar base do tabuleiro
+    [ ] Ajustas orientação das peças (ex.: os cavalos devem se encarar!)
     [X] cena sempre centralizada no viewport
     [X] reajustes ao redimensionar a janela
     [ ] Trackball virtual
