@@ -90,11 +90,34 @@ var ChessPlayer = (function() {
     var x = 0;
     function addToScene(object) { scene.push(object); object.position = vec3.fromValues(-2.50 + x, 0, 0); x += 0.5; return object; }
 
-    this.game = {
-      // board: addToScene(new Board()),
+    game = {
+      board: addToScene(new Board()),
 
-      // one king, one queen, two rooks, two knights, two bishops, and eight pawns
-      pieces: {
+    //   // one king, one queen, two rooks, two knights, two bishops, and eight pawns
+      black: {
+        king: addToScene(new ChessPiece('rei')),
+        queen: addToScene(new ChessPiece('rainha')),
+        rooks: [
+          addToScene(new ChessPiece('torre')),
+          addToScene(new ChessPiece('torre'))
+        ],
+        knights: [
+          addToScene(new ChessPiece('cavalo')),
+          addToScene(new ChessPiece('cavalo'))
+        ],
+        bishops: [
+          addToScene(new ChessPiece('bispo')),
+          addToScene(new ChessPiece('bispo'))
+        ],
+        pawns: [
+          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
+          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
+          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao')),
+          addToScene(new ChessPiece('peao')), addToScene(new ChessPiece('peao'))
+        ]
+      },
+
+      white: {
         king: addToScene(new ChessPiece('rei')),
         queen: addToScene(new ChessPiece('rainha')),
         rooks: [
