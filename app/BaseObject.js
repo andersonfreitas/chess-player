@@ -57,9 +57,9 @@ BaseObject.prototype.loadModelFromObj = function(dados) {
     if (parte == 'v ') {
       var vertice = linha.match(/(-?\d*\.?\d+)\s+(-?\d*\.?\d+)\s+(-?\d*\.?\d+)/);
 
-      var vx = parseFloat(vertice[1]);
-      var vy = parseFloat(vertice[2]);
-      var vz = parseFloat(vertice[3]);
+      var vx = parseFloat(vertice[1]) * 1.3;
+      var vy = parseFloat(vertice[2]) * 1.3;
+      var vz = parseFloat(vertice[3]) * 1.3;
 
       this.verticesBase.push(vec3.fromValues(vx, vy, vz));
       this.colorsBase.push(vec4.fromValues(1.0, 1.0, 1.0, 1.0));
