@@ -299,13 +299,11 @@ var ChessPlayer = (function() {
 
   function updateProjection(projection) {
     mat4.identity(pMatrix);
-    if (projection === 'perspective') {
-      mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100);
-    } else {
-      var w = gl.viewportWidth;
-      var h = gl.viewportHeight;
-      var ratio = w / h;
+    var ratio = gl.viewportWidth / gl.viewportHeight;
 
+    if (projection === 'perspective') {
+      mat4.perspective(pMatrix, 45, ratio, 1, 100);
+    } else {
       mat4.ortho(pMatrix, -5*ratio, 5*ratio, -5, 5, -100, 100);
     }
     setMatrixUniforms();

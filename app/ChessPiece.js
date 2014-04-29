@@ -9,10 +9,11 @@ function ChessPiece(file, color) {
 
   this.positions = {};
 
-  var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+  // in chess's algebraic notation: file=column & rank=row
+  var files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   for (var rank = 1; rank <= 8; rank++) {
-    for (var column = 0; column < 8; column++) {
-      this.positions[rank + columns[column]] = vec3.fromValues(rank - 0.5 - 4, 0, column + 0.5 - 4);
+    for (var file = 0; file < 8; file++) {
+      this.positions[rank + files[file]] = vec3.fromValues(rank - 0.5 - 4, 0, file + 0.5 - 4);
     }
   }
 }
