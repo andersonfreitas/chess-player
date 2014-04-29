@@ -307,13 +307,9 @@ var ChessPlayer = (function() {
       var h = gl.viewportHeight;
       var ratio = w / h;
 
-      if (w <= h)
-        mat4.ortho(pMatrix, -1, 1, -1*ratio, 1*ratio, -100, 100);
-      else
-        mat4.ortho(pMatrix, -1*ratio, 1*ratio, -1, 1, -100, 100);
+      mat4.ortho(pMatrix, -5*ratio, 5*ratio, -5, 5, -100, 100);
 
-      lookAt([50,50,50],[0,0,0])
-
+      lookAt([1,1,1],[0,0,0])
       setMatrixUniforms();
     }
   }
