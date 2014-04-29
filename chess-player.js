@@ -298,12 +298,23 @@ var ChessPlayer = (function() {
   }
 
   function updateProjection(projection) {
+    mat4.identity(pMatrix);
     if (projection === 'perspective') {
-      mat4.identity(pMatrix);
       mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100);
+      setMatrixUniforms();
     } else {
-      mat4.identity(pMatrix);
-      mat4.ortho(pMatrix, 0, gl.viewportWidth, 0, gl.viewportHeight, 0, 100);
+      var w = gl.viewportWidth;
+      var h = gl.viewportHeight;
+      var ratio = w / h;
+
+      if (w <= h)
+        mat4.ortho(pMatrix, -1, 1, -1*ratio, 1*ratio, -100, 100);
+      else
+        mat4.ortho(pMatrix, -1*ratio, 1*ratio, -1, 1, -100, 100);
+
+      lookAt([50,50,50],[0,0,0])
+
+      setMatrixUniforms();
     }
   }
 
