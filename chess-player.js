@@ -254,7 +254,7 @@ var ChessPlayer = (function() {
   }
 
   function setupCameraPosition() {
-    eye = vec3.fromValues(6, 6, 0);
+    eye = vec3.fromValues(6, 6, 6);
     at = vec3.fromValues(0, 0, 0);
     up = vec3.fromValues(0, 1, 0);
     mat4.lookAt(mvMatrix, eye, at, up);
@@ -307,8 +307,6 @@ var ChessPlayer = (function() {
       var ratio = w / h;
 
       mat4.ortho(pMatrix, -5*ratio, 5*ratio, -5, 5, -100, 100);
-
-      lookAt([1,1,1],[0,0,0]); // remover quando o trackball estiver pronto
     }
     setMatrixUniforms();
   }
