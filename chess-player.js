@@ -359,8 +359,21 @@ var ChessPlayer = (function() {
 
     // folders.game.open();
     folders.scene.open();
+    onWindowResize();
+    window.addEventListener('resize', _.debounce(onWindowResize, 300, false), false);
 
     animate();
+  }
+
+  function onWindowResize(event) {
+    var canvas = WebGL.getCanvas();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    gl.viewportWidth = canvas.width;
+    gl.viewportHeight = canvas.height;
+
+    updateProjection(properties.scene.projection);
   }
 
   // public methods

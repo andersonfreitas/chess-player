@@ -23,9 +23,6 @@ var WebGL = (function() {
 
     currentProgram = initShaders('assets/shaders/shader.vsh', 'assets/shaders/shader.fsh');
 
-    onWindowResize();
-    window.addEventListener('resize', _.debounce(onWindowResize, 300, false), false);
-
     gl.clearColor(0.98, 0.98, 0.98, 1.0);
     gl.enable(gl.DEPTH_TEST);
   }
@@ -69,15 +66,10 @@ var WebGL = (function() {
       return program;
   }
 
-  function onWindowResize(event) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    gl.viewportWidth = canvas.width;
-    gl.viewportHeight = canvas.height;
-  }
+  function getCanvas() { return canvas; }
 
   return {
-    init: initWebGL
+    init: initWebGL,
+    getCanvas: getCanvas
   };
 })();
