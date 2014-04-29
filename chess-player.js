@@ -301,7 +301,6 @@ var ChessPlayer = (function() {
     mat4.identity(pMatrix);
     if (projection === 'perspective') {
       mat4.perspective(pMatrix, 45, (gl.viewportWidth / gl.viewportHeight), 1, 100);
-      setMatrixUniforms();
     } else {
       var w = gl.viewportWidth;
       var h = gl.viewportHeight;
@@ -309,9 +308,9 @@ var ChessPlayer = (function() {
 
       mat4.ortho(pMatrix, -5*ratio, 5*ratio, -5, 5, -100, 100);
 
-      lookAt([1,1,1],[0,0,0])
-      setMatrixUniforms();
+      lookAt([1,1,1],[0,0,0]); // remover quando o trackball estiver pronto
     }
+    setMatrixUniforms();
   }
 
   // Initial position,
