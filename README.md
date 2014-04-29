@@ -5,7 +5,7 @@
     [X] Tabuleiro exibido corretamente (espessura, cores e quadrados)
     [X] Peças instanciadas e posicionadas (inicialmente) corretamente
     [X] Perspectiva e viewport atualizados ao redimensionar a janela
-    [.] Troca de Projeções oferecida e executada corretamente (não funciona)
+    [X] Troca de Projeções oferecida e executada corretamente
     [X] Cena centralizada no viewport
     [ ] Movimentação da câmera executado corretamente
     [X] Movimentação das peças gradual e correta.
