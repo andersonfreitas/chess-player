@@ -4,7 +4,7 @@
     [ ] PGN carregado e interpretado corretamente
     [X] Tabuleiro exibido corretamente (espessura, cores e quadrados)
     [X] Peças instanciadas e posicionadas (inicialmente) corretamente
-    [.] Perspectiva e viewport atualizados ao redimensionar a janela (parou de funcionar)
+    [X] Perspectiva e viewport atualizados ao redimensionar a janela
     [.] Troca de Projeções oferecida e executada corretamente (não funciona)
     [X] Cena centralizada no viewport
     [ ] Movimentação da câmera executado corretamente
@@ -28,7 +28,7 @@
         [ ] Desenhar base do tabuleiro com espessura
     [X] Ajustar orientação das peças (ex.: os cavalos devem se encarar!)
     [X] Cena sempre centralizada no viewport
-    [?] Reajustes ao redimensionar a janela
+    [X] Reajustes ao redimensionar a janela
     [ ] Trackball virtual
     [ ] Zoom
     [ ] Carregar PGN (http://en.wikipedia.org/wiki/Portable_Game_Notation)
