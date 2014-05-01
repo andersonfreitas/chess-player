@@ -73,9 +73,9 @@ var ChessPlayer = (function() {
       diffuse: folders.scene.addColor(properties.scene, 'diffuse')
     }
   };
-  controllers.game.autoplay.onChange(function(value) {
-    if (value)
-      randomMove();
+  controllers.game.autoplay.onChange(function(enable) {
+    if (enable)
+      autoplay();
   });
 
   controllers.scene.lightning.onChange(function(value) {
@@ -283,6 +283,14 @@ var ChessPlayer = (function() {
       }
     }
     lastTime = timeNow;
+  }
+
+  function autoplay() {
+    // if (state.hasNextMove()) {
+    state.nextMove();
+    if (properties.game.autoplay && !properties.game.paused)
+      window.setTimeout(autoplay, properties.game.delay);
+    // }
   }
 
   function animate() {

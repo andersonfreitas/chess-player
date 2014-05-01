@@ -12,9 +12,6 @@ for (var rank = 1; rank <= 8; rank++) {
 
 $(document).ready(function() {
   ChessPlayer.init();
-
-  if (ChessPlayer.properties.game.autoplay)
-    window.setTimeout(randomMove, 4000);
 });
 
 function randomMove() {
