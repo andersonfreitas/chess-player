@@ -9,6 +9,8 @@ var ChessPlayer = (function() {
   var mvMatrixStack = [];
   var pMatrix = mat4.create();
 
+  var board;
+
   function mvPushMatrix() {
     var copy = mat4.create();
     mat4.copy(copy, mvMatrix);
@@ -30,10 +32,10 @@ var ChessPlayer = (function() {
   var properties = {
     game: {
       pgn: 'sample.pgn',
-      reload: function() { console.log('Reloading PGN from file... ' + properties.game.pgn); },
-      autoplay: true,
-      next: function() { console.log('Playing NEXT move from PGN...'); },
-      previous: function() { console.log('Playing PREVIOUS move from PGN...'); },
+      reload: function() { positionPieces(); state.restart(board); },
+      autoplay: false,
+      next: function() { state.nextMove(); },
+      previous: function() { state.previousMove(); },
       paused: false,
       duration: 500,
       delay: 1000
@@ -175,14 +177,15 @@ var ChessPlayer = (function() {
       var reader = new FileReader();
       reader.onload = (function(theFile) {
         return function(e) {
-          console.log(e.target.result);
+          positionPieces();
+
+          state = new GameState(board);
+          state.loadFromFile(e.target.result);
         };
       })(f);
 
       reader.readAsText(f);
     }
-
-    console.log('handleFileSelect');
   }
 
   function initShaderVars() {
@@ -374,7 +377,7 @@ var ChessPlayer = (function() {
     updateProjection('perspective');
     updateLightning(true);
 
-    // folders.game.open();
+    folders.game.open();
     folders.scene.open();
     onWindowResize();
     window.addEventListener('resize', _.debounce(onWindowResize, 300, false), false);
@@ -400,6 +403,8 @@ var ChessPlayer = (function() {
     scene: function() { return scene; },
     game: function() { return game; },
     properties: properties,
-    lookAt: lookAt
+    lookAt: lookAt,
+    state: function() { return state; },
+    board: function() { return board; }
   };
 })();
