@@ -1,27 +1,20 @@
+class Move
+  constructor: (@piece = 'P', @color, @from, @to, @promotion, @result, @str) ->
+
+window.Move = Move
+
 class PgnParser
 
   constructor: (@file) ->
-    @cleanFile
-
-  cleanFile: ->
-    @file = @file
-      .replace(/\{([^\}]*)\}/g, '') # removendo comentários
-      .replace(/\[([^\]]*)\]/g, '') # removendo comentários
-      .replace(/\(([^\)]*)\)/g, '') # removendo metadata
-      .replace(/\$\d+/g,'')
-      .replace(/\d+\.{1,3}/g,'')    # removendo jogadas
-      .replace(/\s+/g,' ')          # multiplos espaços
-      .trim()
-      .replace(/(0-1)$/g,'')        # resultado final
-      .replace(/(1-0)$/g,'')        # resultado final
-      .replace(/(1\/2-1\/2)$/g,'')  # resultado final
-      .replace(/(\*)$/g,'')         # resultado final
-      .trim()
-      .split(' ')
 
   parse: ->
-    moves = {}
+    @moves = []
+    moves = @file.match /(([a-h][1-8])([+#])?)-(([a-h][1-8])([+#])?)/g
 
+    console.log moves
+
+    _.each moves, (move) ->
+      @moves.push new Move(from, to)
 
 
 window.PgnParser = PgnParser
