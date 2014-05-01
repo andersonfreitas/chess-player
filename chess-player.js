@@ -10,6 +10,7 @@ var ChessPlayer = (function() {
   var pMatrix = mat4.create();
 
   var board;
+  var state;
 
   function mvPushMatrix() {
     var copy = mat4.create();
@@ -32,7 +33,7 @@ var ChessPlayer = (function() {
   var properties = {
     game: {
       pgn: 'sample.pgn',
-      reload: function() { positionPieces(); state.restart(board); },
+      reload: function() { positionPieces(); console.log(board); state.restart(board); },
       autoplay: false,
       next: function() { state.nextMove(); },
       previous: function() { state.previousMove(); },
@@ -106,7 +107,7 @@ var ChessPlayer = (function() {
     game = {
       board: addToScene(new Board()),
 
-    //   // one king, one queen, two rooks, two knights, two bishops, and eight pawns
+      // one king, one queen, two rooks, two knights, two bishops, and eight pawns
       black: {
         king: addToScene(new ChessPiece('rei', blackColor)),
         queen: addToScene(new ChessPiece('rainha', blackColor)),
@@ -172,8 +173,6 @@ var ChessPlayer = (function() {
 
     var output = [];
     for (var i = 0, f; f = files[i]; i++) {
-      // console.log(escape(f.name), f.stype || 'n/a', ' - ', f.size, ' bytes, last modified: ', f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a');
-
       var reader = new FileReader();
       reader.onload = (function(theFile) {
         return function(e) {
@@ -289,11 +288,9 @@ var ChessPlayer = (function() {
   }
 
   function autoplay() {
-    // if (state.hasNextMove()) {
     state.nextMove();
     if (properties.game.autoplay && !properties.game.paused)
       window.setTimeout(autoplay, properties.game.delay);
-    // }
   }
 
   function animate() {
@@ -328,8 +325,8 @@ var ChessPlayer = (function() {
 
     var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     for (var rank = 1; rank <= 8; rank++)
-      for (var column = 0; column < 8; column++)
-        board[rank + columns[column]] = undefined;
+      for (var file = 0; file < 8; file++)
+        board[columns[file] + rank] = undefined;
 
     board['a1'] = game.black.rooks[0].moveTo('a1');
     board['b1'] = game.black.knights[0].moveTo('b1');

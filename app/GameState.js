@@ -21,7 +21,7 @@
     };
 
     GameState.prototype.previousMove = function() {
-      var move = this.moves[idx - 1 <= 0 ? 0 : --idx];
+      var move = this.moves[this.idx - 1 <= 0 ? 0 : --this.idx];
       var obj = board[move.to];
 
       this.board[move.to] = undefined;
@@ -31,7 +31,7 @@
     };
 
     GameState.prototype.nextMove = function() {
-      var move = this.moves[idx++];
+      var move = this.moves[this.idx++];
       var obj = this.board[move.from];
 
       if (this.board[move.to] !== undefined) {
