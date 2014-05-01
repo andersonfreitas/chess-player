@@ -47,6 +47,10 @@ ChessPiece.prototype.animateMoveTo = function(pos, duration) {
   this.animating = true;
 };
 
+ChessPiece.prototype.capture = function(duration) {
+  this.position[1] = 10000;
+};
+
 /**
  * Animando com uma curva bezier quadrática
  */
