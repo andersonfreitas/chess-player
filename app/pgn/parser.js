@@ -16,7 +16,7 @@
       var moves,
         _this = this;
       moves = this.file.match(OPERATOR);
-      _.each(moves, function(move) {
+      return _.each(moves, function(move) {
         var from, to, _ref;
         _ref = move.split('-'), from = _ref[0], to = _ref[1];
         return _this.moves.push({
@@ -24,7 +24,6 @@
           to: to
         });
       });
-      return console.log(this.moves);
     };
 
     return PgnParser;

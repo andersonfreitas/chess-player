@@ -31,6 +31,4 @@ class PgnParser
       [from, to] = move.split('-')
       @moves.push { from: from, to: to }
 
-    console.log @moves
-
 window.PgnParser = PgnParser
