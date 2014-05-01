@@ -313,39 +313,46 @@ var ChessPlayer = (function() {
   // first row: rook, knight, bishop, queen, king, bishop, knight, and rook;
   // second row: pawns
   function positionPieces() {
-    game.black.rooks[0].moveTo('1a');
-    game.black.knights[0].moveTo('1b');
-    game.black.bishops[0].moveTo('1c');
-    game.black.queen.moveTo('1d');
-    game.black.king.moveTo('1e');
-    game.black.bishops[1].moveTo('1f');
-    game.black.knights[1].moveTo('1g');
-    game.black.rooks[1].moveTo('1h');
+    board = {}
 
     var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    for (var rank = 1; rank <= 8; rank++)
+      for (var column = 0; column < 8; column++)
+        board[rank + columns[column]] = undefined;
+
+    board['a1'] = game.black.rooks[0].moveTo('a1');
+    board['b1'] = game.black.knights[0].moveTo('b1');
+    board['c1'] = game.black.bishops[0].moveTo('c1');
+    board['d1'] = game.black.queen.moveTo('d1');
+    board['e1'] = game.black.king.moveTo('e1');
+    board['f1'] = game.black.bishops[1].moveTo('f1');
+    board['g1'] = game.black.knights[1].moveTo('g1');
+    board['h1'] = game.black.rooks[1].moveTo('h1');
+
     for (var i = 0; i < game.black.pawns.length; i++) {
       pawn = game.black.pawns[i];
-      pawn.moveTo('2' + columns[i]);
+      pawn.moveTo(columns[i] + '2');
+      board[columns[i] + '2'] = pawn;
     };
 
     // rotacionado todas as peças pretas para ficarem de frente para a camera
     _.invoke(_.flatten(ChessPlayer.game().black), 'rotate', [0, 180, 0]);
     game.black.king.rotate([0, 90, 0]);
 
-    game.white.rooks[0].moveTo('8a');
-    game.white.knights[0].moveTo('8b');
-    game.white.bishops[0].moveTo('8c');
-    game.white.queen.moveTo('8d');
-    game.white.king.moveTo('8e').rotate([0, 90, 0]);
-    game.white.bishops[1].moveTo('8f');
-    game.white.knights[1].moveTo('8g');
-    game.white.rooks[1].moveTo('8h');
+    board['a8'] = game.white.rooks[0].moveTo('a8');
+    board['b8'] = game.white.knights[0].moveTo('b8');
+    board['c8'] = game.white.bishops[0].moveTo('c8');
+    board['d8'] = game.white.queen.moveTo('d8');
+    board['e8'] = game.white.king.moveTo('e8').rotate([0, 90, 0]);
+    board['f8'] = game.white.bishops[1].moveTo('f8');
+    board['g8'] = game.white.knights[1].moveTo('g8');
+    board['h8'] = game.white.rooks[1].moveTo('h8');
 
-    var columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     for (var i = 0; i < game.white.pawns.length; i++) {
       pawn = game.white.pawns[i];
-      pawn.moveTo('7' + columns[i]);
-    };
+      pawn.moveTo(columns[i] + '7');
+      board[columns[i] + '7'] = pawn;
+    }
   }
 
   function init() {

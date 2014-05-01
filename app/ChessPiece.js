@@ -13,7 +13,7 @@ function ChessPiece(file, color) {
   var files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   for (var rank = 1; rank <= 8; rank++) {
     for (var file = 0; file < 8; file++) {
-      this.positions[rank + files[file]] = vec3.fromValues(rank - 0.5 - 4, 0, file + 0.5 - 4);
+      this.positions[files[file] + rank] = vec3.fromValues(rank - 0.5 - 4, 0, file + 0.5 - 4);
     }
   }
 }
