@@ -36,7 +36,6 @@ var ChessPlayer = (function() {
       reload: function() { positionPieces(); console.log(board); state.restart(board); },
       autoplay: false,
       next: function() { state.nextMove(); },
-      previous: function() { state.previousMove(); },
       paused: false,
       duration: 500,
       delay: 1000
@@ -62,7 +61,6 @@ var ChessPlayer = (function() {
       reload: folders.game.add(properties.game, 'reload'),
       autoplay: folders.game.add(properties.game, 'autoplay'),
       next: folders.game.add(properties.game, 'next'),
-      previous: folders.game.add(properties.game, 'previous'),
       paused: folders.game.add(properties.game, 'paused'),
       duration: folders.game.add(properties.game, 'duration'),
       delay: folders.game.add(properties.game, 'delay')

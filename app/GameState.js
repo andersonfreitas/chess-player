@@ -20,16 +20,6 @@
       this.moves = parser.moves;
     };
 
-    GameState.prototype.previousMove = function() {
-      var move = this.moves[this.idx - 1 <= 0 ? 0 : --this.idx];
-      var obj = board[move.to];
-
-      this.board[move.to] = undefined;
-      this.board[move.from] = obj;
-
-      obj.animateMoveTo(move.from, ChessPlayer.properties.game.duration);
-    };
-
     GameState.prototype.nextMove = function() {
       var move = this.moves[this.idx++];
       var obj = this.board[move.from];
