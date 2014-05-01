@@ -1,20 +1,36 @@
-class Move
-  constructor: (@piece = 'P', @color, @from, @to, @promotion, @result, @str) ->
-
-window.Move = Move
-
 class PgnParser
 
+  # detectando a forma mais completa do h-LAN
+  OPERATOR = ///
+    (
+      # origem
+      ([NBRQK])?        # nomes de peças válidas
+      ([a-h]?[1-8]?)?   # coordenadas no tabuleiro
+      x?                # peça capturada
+      ([a-h][1-8])      # coordenadas no tabuleiro
+      (=[NBRQK])?
+      ([+#])?
+    )
+    \-
+      # destino
+      ([NBRQK])?        # nomes de peças válidas
+      ([a-h]?[1-8]?)?   # coordenadas no tabuleiro
+      x?                # peça capturada
+      ([a-h][1-8])      # coordenadas no tabuleiro
+      (=[NBRQK])?
+      ([+#])?
+    ///g
+
   constructor: (@file) ->
+    @moves = []
 
   parse: ->
-    @moves = []
-    moves = @file.match /(([NBRQK])?([a-h]?[1-8]?)?x?([a-h][1-8])(=[NBRQK])?([+#])?)\-(([NBRQK])?([a-h]?[1-8]?)?x?([a-h][1-8])(=[NBRQK])?([+#])?)/g
+    moves = @file.match OPERATOR
 
-    console.log moves
+    _.each moves, (move) =>
+      [from, to] = move.split('-')
+      @moves.push { from: from, to: to }
 
-    _.each moves, (move) ->
-      @moves.push new Move(from, to)
-
+    console.log @moves
 
 window.PgnParser = PgnParser
