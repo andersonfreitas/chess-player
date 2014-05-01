@@ -7,6 +7,7 @@
 
     function GameState(board) {
       this.board = board;
+      this.idx = 0;
     }
 
     GameState.prototype.restart = function(board) {
