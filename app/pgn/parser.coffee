@@ -9,7 +9,7 @@ class PgnParser
 
   parse: ->
     @moves = []
-    moves = @file.match /(([a-h][1-8])([+#])?)-(([a-h][1-8])([+#])?)/g
+    moves = @file.match /(([NBRQK])?([a-h]?[1-8]?)?x?([a-h][1-8])(=[NBRQK])?([+#])?)\-(([NBRQK])?([a-h]?[1-8]?)?x?([a-h][1-8])(=[NBRQK])?([+#])?)/g
 
     console.log moves
 
