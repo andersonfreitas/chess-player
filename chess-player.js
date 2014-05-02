@@ -36,7 +36,6 @@ var ChessPlayer = (function() {
       reload: function() { positionPieces(); console.log(board); state.restart(board); },
       autoplay: false,
       next: function() { state.nextMove(); },
-      paused: false,
       duration: 500,
       delay: 1000
     },
@@ -61,7 +60,6 @@ var ChessPlayer = (function() {
       reload: folders.game.add(properties.game, 'reload'),
       autoplay: folders.game.add(properties.game, 'autoplay'),
       next: folders.game.add(properties.game, 'next'),
-      paused: folders.game.add(properties.game, 'paused'),
       duration: folders.game.add(properties.game, 'duration'),
       delay: folders.game.add(properties.game, 'delay')
     },
@@ -275,8 +273,7 @@ var ChessPlayer = (function() {
       for (var i = scene.length - 1; i >= 0; i--) {
         obj = scene[i];
 
-        if (!properties.game.paused)
-          obj.updateAnimation(elapsed);
+        obj.updateAnimation(elapsed);
       }
     }
     lastTime = timeNow;
@@ -284,7 +281,7 @@ var ChessPlayer = (function() {
 
   function autoplay() {
     state.nextMove();
-    if (properties.game.autoplay && !properties.game.paused)
+    if (properties.game.autoplay)
       window.setTimeout(autoplay, properties.game.delay);
   }
 
