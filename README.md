@@ -21,27 +21,15 @@
      5 [.] Zoom In/Out executado corretamente
     10 [.] Movimentação da câmera executado corretamente
 
-    [ ] Interpretar as jogadas com + e #, O-O e o-o-o
-
 # Tarefas
 
-    [X] Estrutura de classes básicas para o projeto
-    [X] GUI para controlar a cena
-    [X] Iluminação simples
-    [ ] Implementar modelo Blinn-phong no vertex shader (smooth)
-    [X] Desenhar um tabuleiro
-        [ ] Mapear a textura em um cubo
-        [ ] Desenhar base do tabuleiro com espessura
-    [X] Ajustar orientação das peças (ex.: os cavalos devem se encarar!)
-    [X] Cena sempre centralizada no viewport
-    [X] Reajustes ao redimensionar a janela
+    [ ] Detectar os bounds do jogo
+    [ ] Desenhar a base do tabuleiro com espessura
     [ ] Trackball virtual
     [ ] Zoom
-    [ ] Carregar PGN (http://en.wikipedia.org/wiki/Portable_Game_Notation)
-        [ ] de forma com que todas as jogadas já estejam na memória
-        [ ] botão next/prev. automatico.
-    [X] Instanciar as peças de acordo com o setup inicial
-    [X] Animar a movimentação das peças
+    [ ] Escrever um LEIAME.txt
+    [ ] Interpretar as jogadas com + e #, O-O e o-o-o
+    [ ] (Opcional) Implementar modelo Blinn-phong no vertex shader (smooth)
 
 ## Compilação do .coffee
 
