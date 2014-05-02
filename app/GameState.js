@@ -33,6 +33,13 @@
       this.board[move.from] = undefined;
       this.board[move.to] = obj;
 
+      if (this.idx % 2 == 0) {
+        $("#info .log").append("<p class='move-"  + Math.floor(this.idx/2) + "'>" + Math.floor(this.idx/2) + ". " + move.to + "</p>");
+      } else {
+        $(".move-"+Math.floor(this.idx/2)).append("<span class='white-move'>" + move.to + "</span>");
+      }
+
+
       obj.animateMoveTo(move.to, ChessPlayer.properties.animation.duration);
     };
 

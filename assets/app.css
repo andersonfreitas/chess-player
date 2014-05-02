@@ -19,3 +19,27 @@ body {
   width: 100%;
   float: right;
 }
+
+#info {
+  position: absolute;
+  bottom: 0px;
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  margin: 3px 3px 3px 3px;
+}
+
+#info .log {
+  position: absolute;
+  bottom: 0;
+}
+
+#info .log p {
+  font-family: Verdana, sans-serif;
+  font-size: 0.8em;
+}
+
+.white-move {
+  color: #777;
+  margin-left: 10px;
+}
