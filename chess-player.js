@@ -105,6 +105,7 @@ var ChessPlayer = (function() {
 
     game = {
       board: addToScene(new Board()),
+      base: addToScene(new BoardCube()),
 
       // one king, one queen, two rooks, two knights, two bishops, and eight pawns
       black: {
