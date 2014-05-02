@@ -34,8 +34,10 @@ var ChessPlayer = (function() {
     game: {
       pgn: '',
       reload: function() { positionPieces(); state.restart(board); },
-      autoplay: false,
-      next: function() { state.nextMove(); },
+      autoplay: true,
+      next: function() { state.nextMove(); }
+    },
+    animation: {
       duration: 500,
       delay: 1000
     },
@@ -45,13 +47,14 @@ var ChessPlayer = (function() {
       wireframe: false,
       lightning: true,
       resolution: 2,
-      diffuse: '#ccc'
+      diffuseLight: '#ccc'
     }
   };
 
   var folders = {
     game: gui.addFolder('Game'),
-    scene: gui.addFolder('Scene')
+    scene: gui.addFolder('Scene'),
+    animation: gui.addFolder('Animation')
   };
 
   var controllers = {
@@ -59,17 +62,17 @@ var ChessPlayer = (function() {
       pgn: folders.game.add(properties.game, 'pgn'),
       reload: folders.game.add(properties.game, 'reload'),
       autoplay: folders.game.add(properties.game, 'autoplay'),
-      next: folders.game.add(properties.game, 'next'),
-      duration: folders.game.add(properties.game, 'duration'),
-      delay: folders.game.add(properties.game, 'delay')
+      next: folders.game.add(properties.game, 'next')
+    },
+    animation: {
+      duration: folders.animation.add(properties.animation, 'duration'),
+      delay: folders.animation.add(properties.animation, 'delay')
     },
     scene: {
       projection: folders.scene.add(properties.scene, 'projection', ['perspective', 'isometric']),
       wireframe: folders.scene.add(properties.scene, 'wireframe'),
       lightning: folders.scene.add(properties.scene, 'lightning'),
-      // shadows: folders.scene.add(properties.scene, 'shadows'),
-      // resolution: folders.scene.add(properties.scene, 'resolution', { low: 1, medium: 2, high: 3 }),
-      diffuse: folders.scene.addColor(properties.scene, 'diffuse')
+      diffuseLight: folders.scene.addColor(properties.scene, 'diffuseLight')
     }
   };
   controllers.game.autoplay.onChange(function(enable) {
@@ -81,7 +84,7 @@ var ChessPlayer = (function() {
     updateLightning(value);
   });
 
-  controllers.scene.diffuse.onChange(function(value) {
+  controllers.scene.diffuseLight.onChange(function(value) {
     var color = Utils.hexToRgb(value);
     gl.uniform3f(currentProgram.u_DiffuseLight, color.r, color.g, color.b);
   });
@@ -282,7 +285,7 @@ var ChessPlayer = (function() {
   function autoplay() {
     state.nextMove();
     if (properties.game.autoplay)
-      window.setTimeout(autoplay, properties.game.delay);
+      window.setTimeout(autoplay, properties.animation.delay);
   }
 
   function animate() {

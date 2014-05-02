@@ -27,13 +27,13 @@
 
       if (this.board[move.to] !== undefined) {
         // remove a peça
-        this.board[move.to].capture(ChessPlayer.properties.game.duration);
+        this.board[move.to].capture(ChessPlayer.properties.animation.duration);
       }
 
       this.board[move.from] = undefined;
       this.board[move.to] = obj;
 
-      obj.animateMoveTo(move.to, ChessPlayer.properties.game.duration);
+      obj.animateMoveTo(move.to, ChessPlayer.properties.animation.duration);
     };
 
     return GameState;
