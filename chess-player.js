@@ -32,8 +32,8 @@ var ChessPlayer = (function() {
 
   var properties = {
     game: {
-      pgn: 'sample.pgn',
-      reload: function() { positionPieces(); console.log(board); state.restart(board); },
+      pgn: '',
+      reload: function() { positionPieces(); state.restart(board); },
       autoplay: false,
       next: function() { state.nextMove(); },
       duration: 500,

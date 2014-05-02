@@ -14,9 +14,6 @@ var π = Math.PI, τ = π * 2;
     this.Utils = Utils;
   }
 
-  /**
-  Utils.loadRemoteFile(this, "README.md", function(url, contents) { console.log("URL", url, "Contents", contents) })
-   */
   Utils.loadRemoteFile = function(context, url, callback) {
     var req = new XMLHttpRequest();
 
