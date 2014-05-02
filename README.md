@@ -13,7 +13,7 @@
      5 [ ] Zoom In/Out executado corretamente
      5 [X] Pausar/Continuar o jogo desenvolvido e executado corretamente
      5 [X] Reiniciar o jogo desenvolvido e executado corretamente
-     3 [X] Arquivo LEIAME.TXT criado com conteúdo satisfatório e correto
+     3 [ ] Arquivo LEIAME.TXT criado com conteúdo satisfatório e correto
      5 [X] Projeto entregue corretamente no PACA e compactado
     60 TOTAL
 
