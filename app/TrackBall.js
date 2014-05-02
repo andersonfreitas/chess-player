@@ -19,7 +19,6 @@
       this.canvas.addEventListener("mousedown", function(ev) { that.onMouseDown(ev); }, false);
       this.canvas.addEventListener("mouseup", function(ev) { that.onMouseUp(ev); }, false);
       this.canvas.addEventListener("mousemove", function(ev) { that.onMouseMove(ev); }, false);
-      // this.canvas.addEventListener("mousewheel", this.onMouseWheel, false);
     }
 
     TrackBall.prototype.onMouseDown = function(ev) {
@@ -49,10 +48,6 @@
       }
       this.lastX = x;
       this.lastY = y;
-    }
-
-    TrackBall.prototype.onMouseWheel = function() {
-      // console.log("onMouseWheel");
     }
 
     TrackBall.prototype.getRotation = function() {
