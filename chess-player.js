@@ -50,6 +50,7 @@ var ChessPlayer = (function() {
       wireframe: false,
       lightning: true,
       resolution: 2,
+      zoom: 0.500,
       diffuseLight: '#ccc'
     }
   };
@@ -76,7 +77,8 @@ var ChessPlayer = (function() {
       projection: folders.scene.add(properties.scene, 'projection', ['perspective', 'isometric']),
       wireframe: folders.scene.add(properties.scene, 'wireframe'),
       lightning: folders.scene.add(properties.scene, 'lightning'),
-      diffuseLight: folders.scene.addColor(properties.scene, 'diffuseLight')
+      diffuseLight: folders.scene.addColor(properties.scene, 'diffuseLight'),
+      zoom: folders.scene.add(properties.scene, 'zoom', 0.2, 2),
     }
   };
   controllers.game.autoplay.onChange(function(enable) {
@@ -241,10 +243,6 @@ var ChessPlayer = (function() {
 
     setupCameraPosition();
 
-    // if (properties.animation.rotateY) {
-    //   mat4.rotateY(mvMatrix, mvMatrix, π/180);
-    // }
-
     mat4.rotateX(mvMatrix, mvMatrix, tb.getRotation()[0]*π/180);
     mat4.rotateY(mvMatrix, mvMatrix, tb.getRotation()[1]*π/180);
 
@@ -264,7 +262,8 @@ var ChessPlayer = (function() {
 
   function setupCameraPosition() {
     mat4.identity(mvMatrix);
-    eye = vec3.fromValues(6, 6, 6);
+    zoom = 12 * properties.scene.zoom;
+    eye = vec3.fromValues(zoom, zoom, zoom);
     at = vec3.fromValues(0, 0, 0);
     up = vec3.fromValues(0, 1, 0);
     mat4.lookAt(mvMatrix, eye, at, up);
