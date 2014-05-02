@@ -51,7 +51,7 @@ BoardCube.prototype.createSquare = function() {
     4, 3, 7
   );
 
-  squareColor = vec4.fromValues(0, 1, 1, 1);
+  squareColor = vec4.fromValues(0, 0, 0, 1);
   this.colors.push(squareColor, squareColor, squareColor, squareColor, squareColor, squareColor,squareColor, squareColor,squareColor, squareColor);
 
   var up = vec3.fromValues(0, 1, 0);
