@@ -363,6 +363,9 @@ var ChessPlayer = (function() {
 
     state = new GameState(board);
     state.loadFromFile(file);
+
+    if (properties.game.autoplay)
+      autoplay();
   }
 
   function init() {
