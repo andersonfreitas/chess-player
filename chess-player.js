@@ -12,6 +12,8 @@ var ChessPlayer = (function() {
   var board;
   var state;
 
+  var tb; // track ball
+
   function mvPushMatrix() {
     var copy = mat4.create();
     mat4.copy(copy, mvMatrix);
@@ -237,12 +239,14 @@ var ChessPlayer = (function() {
 
     gl.useProgram(currentProgram);
 
-    // gl.uniform1f(gl.getUniformLocation(currentProgram, 'time'), parameters.time / 1000);
-    // gl.uniform2f(gl.getUniformLocation(currentProgram, 'resolution'), parameters.screenWidth, parameters.screenHeight);
+    setupCameraPosition();
 
-    if (properties.animation.rotateY) {
-      mat4.rotateY(mvMatrix, mvMatrix, π/180);
-    }
+    // if (properties.animation.rotateY) {
+    //   mat4.rotateY(mvMatrix, mvMatrix, π/180);
+    // }
+
+    mat4.rotateX(mvMatrix, mvMatrix, tb.getRotation()[0]*π/180);
+    mat4.rotateY(mvMatrix, mvMatrix, tb.getRotation()[1]*π/180);
 
     for (var i = scene.length - 1; i >= 0; i--) {
       obj = scene[i];
@@ -259,19 +263,10 @@ var ChessPlayer = (function() {
   }
 
   function setupCameraPosition() {
+    mat4.identity(mvMatrix);
     eye = vec3.fromValues(6, 6, 6);
     at = vec3.fromValues(0, 0, 0);
     up = vec3.fromValues(0, 1, 0);
-    mat4.lookAt(mvMatrix, eye, at, up);
-  }
-
-  function lookAt(eye, at) {
-    mat4.identity(mvMatrix);
-
-    eye = vec3.fromValues(eye[0], eye[1], eye[2]);
-    at = vec3.fromValues(at[0], at[1], at[2]);
-    up = vec3.fromValues(0, 1, 0);
-
     mat4.lookAt(mvMatrix, eye, at, up);
   }
 
@@ -393,6 +388,8 @@ var ChessPlayer = (function() {
     onWindowResize();
     window.addEventListener('resize', _.debounce(onWindowResize, 300, false), false);
 
+    tb = new TrackBall(WebGL.getCanvas());
+
     animate();
   }
 
@@ -414,7 +411,6 @@ var ChessPlayer = (function() {
     scene: function() { return scene; },
     game: function() { return game; },
     properties: properties,
-    lookAt: lookAt,
     state: function() { return state; },
     board: function() { return board; }
   };
