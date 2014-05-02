@@ -13,6 +13,7 @@
     GameState.prototype.restart = function(board) {
       this.board = board;
       this.idx = 0;
+      $('.moves').children().remove();
     }
 
     GameState.prototype.loadFromFile = function(file) {
@@ -33,12 +34,11 @@
       this.board[move.from] = undefined;
       this.board[move.to] = obj;
 
-      if (this.idx % 2 == 0) {
-        $("#info .log").append("<p class='move-"  + Math.floor(this.idx/2) + "'>" + Math.floor(this.idx/2) + ". " + move.to + "</p>");
+      if (this.idx % 2 == 1) {
+        $(".moves").append("<li>" + move.to + "</li>");
       } else {
-        $(".move-"+Math.floor(this.idx/2)).append("<span class='white-move'>" + move.to + "</span>");
+        $(".moves li:last").append("<span class='white-move'>" + move.to + "</span>");
       }
-
 
       obj.animateMoveTo(move.to, ChessPlayer.properties.animation.duration);
     };
