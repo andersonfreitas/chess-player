@@ -39,7 +39,8 @@ var ChessPlayer = (function() {
     },
     animation: {
       duration: 500,
-      delay: 1000
+      delay: 1000,
+      rotateY: false
     },
     scene: {
       projection: 'perspective',
@@ -66,7 +67,8 @@ var ChessPlayer = (function() {
     },
     animation: {
       duration: folders.animation.add(properties.animation, 'duration'),
-      delay: folders.animation.add(properties.animation, 'delay')
+      delay: folders.animation.add(properties.animation, 'delay'),
+      rotateY: folders.animation.add(properties.animation, 'rotateY')
     },
     scene: {
       projection: folders.scene.add(properties.scene, 'projection', ['perspective', 'isometric']),
@@ -237,6 +239,10 @@ var ChessPlayer = (function() {
 
     // gl.uniform1f(gl.getUniformLocation(currentProgram, 'time'), parameters.time / 1000);
     // gl.uniform2f(gl.getUniformLocation(currentProgram, 'resolution'), parameters.screenWidth, parameters.screenHeight);
+
+    if (properties.animation.rotateY) {
+      mat4.rotateY(mvMatrix, mvMatrix, π/180);
+    }
 
     for (var i = scene.length - 1; i >= 0; i--) {
       obj = scene[i];
