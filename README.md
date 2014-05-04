@@ -14,7 +14,7 @@
 
 Ao abrir o jogo, imediatamente é carregado um arquivo PGN exemplo.
 
-Utilize o mouse para controlar a rotação da cena.
+Utilize o mouse para controlar a rotação da cena. Com o botão direito é possível controlar o zoom.
 
 No canto inferior esquerdo há um "log" com as movimentações feitas de acordo com o arquivo PGN.
 
