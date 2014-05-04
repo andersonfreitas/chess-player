@@ -28,6 +28,10 @@
 
     GameState.prototype.nextMove = function() {
       var move = this.moves[this.idx++];
+
+      if (move === undefined) // fim de jogo
+        return;
+
       var obj = this.board[move.from];
 
       if (this.board[move.to] !== undefined) {
