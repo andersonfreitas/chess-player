@@ -41,8 +41,7 @@ var ChessPlayer = (function() {
     },
     animation: {
       duration: 500,
-      delay: 1000,
-      rotateY: false
+      delay: 1000
     },
     scene: {
       projection: 'perspective',
@@ -70,8 +69,7 @@ var ChessPlayer = (function() {
     },
     animation: {
       duration: folders.animation.add(properties.animation, 'duration'),
-      delay: folders.animation.add(properties.animation, 'delay'),
-      rotateY: folders.animation.add(properties.animation, 'rotateY')
+      delay: folders.animation.add(properties.animation, 'delay')
     },
     scene: {
       projection: folders.scene.add(properties.scene, 'projection', ['perspective', 'isometric']),
