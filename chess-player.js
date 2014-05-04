@@ -374,7 +374,7 @@ var ChessPlayer = (function() {
     initShaderVars();
     initLocalFileLoad();
 
-    loadPGNFile("1. e2-e4 e7-e5 2. g1-f3 b8-c6 3. f1-c4 f8-c5 4. b2-b4 c5-b4 5. c2-c3 b4-c5 6. e1-g1 d7-d6 7. d2-d4 e5-d4 8. c3-d4 c5-b6 9. b1-c3 c6-a5 10. c4-d3 g8-e7 11. e4-e5 d6-e5 12. d4-e5 e8-g8 13. d1-c2 h7-h6 14. c1-a3 c7-c5 15. a1-d1 c8-d7 16. e5-e6 f7-e6 17. d3-h7+ g8-h8 18. f3-e5 e7-d5 19. c3-d5 e6-d5 20. d1-d5 d7-f5 21. d5-d8 f5-c2 22. d8-f8+ a8-f8 23. h7-c2 1-0");
+    loadPGNFile("1. e2-e4 e7-e5 2. g1-f3 b8-c6 3. f1-c4 f8-c5 4. b2-b4 c5-b4 5. c2-c3 b4-c5 6. e1-g1 d7-d6 7. d2-d4 e5-d4 8. c3-d4 c5-b6 9. b1-c3 c6-a5 10. c4-d3 g8-e7 11. e4-e5 d6-e5 12. d4-e5 e8-g8 13. d1-c2 h7-h6 14. c1-a3 c7-c5 15. a1-d1 c8-d7 16. e5-e6 f7-e6 17. d3-h7+ g8-h8 18. f3-e5 e7-d5 19. c3-d5 e6-d5 20. d1-d5 d7-f5 21. d5-d8 f5-c2 22. d8-f8+ a8-f8 23. h7-c2# 1-0");
 
     setupCameraPosition();
     updateProjection('perspective');
