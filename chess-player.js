@@ -76,7 +76,7 @@ var ChessPlayer = (function() {
       wireframe: folders.scene.add(properties.scene, 'wireframe'),
       lightning: folders.scene.add(properties.scene, 'lightning'),
       diffuseLight: folders.scene.addColor(properties.scene, 'diffuseLight'),
-      zoom: folders.scene.add(properties.scene, 'zoom', 0.2, 2),
+      zoom: folders.scene.add(properties.scene, 'zoom', 0.2, 2).listen(),
     }
   };
   controllers.game.autoplay.onChange(function(enable) {

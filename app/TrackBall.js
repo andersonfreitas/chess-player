@@ -16,6 +16,7 @@
 
       this.currentAngle = [0.0, 0.0];
 
+      $(document).on({ "contextmenu": function(e) { e.preventDefault(); }});
       this.canvas.addEventListener("mousedown", function(ev) { that.onMouseDown(ev); }, false);
       this.canvas.addEventListener("mouseup", function(ev) { that.onMouseUp(ev); }, false);
       this.canvas.addEventListener("mousemove", function(ev) { that.onMouseMove(ev); }, false);
@@ -38,13 +39,23 @@
       var x = ev.clientX, y = ev.clientY;
 
       if (this.dragging) {
-        var factor = 100 / this.canvas.height;
+        if (ev.which === 3 || ev.button === 2) {
+          var factor = 100 / this.canvas.height;
+          var dy = factor * (y - this.lastY) * 0.01;
 
-        var dx = factor * (x - this.lastX);
-        var dy = factor * (y - this.lastY);
+          zoom = ChessPlayer.properties.scene.zoom + dy;
 
-        this.currentAngle[0] = this.currentAngle[0] + dy; //Math.max(Math.min(this.currentAngle[0] + dy, 90.0), -90.0);
-        this.currentAngle[1] = this.currentAngle[1] + dx;
+          ChessPlayer.properties.scene.zoom = Math.max(Math.min(zoom, 2), 0.2);
+        }
+        if (ev.which === 1 || ev.button === 0) {
+          var factor = 100 / this.canvas.height;
+
+          var dx = factor * (x - this.lastX);
+          var dy = factor * (y - this.lastY);
+
+          this.currentAngle[0] = this.currentAngle[0] + dy; //Math.max(Math.min(this.currentAngle[0] + dy, 90.0), -90.0);
+          this.currentAngle[1] = this.currentAngle[1] + dx;
+        }
       }
       this.lastX = x;
       this.lastY = y;
