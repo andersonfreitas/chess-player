@@ -34,6 +34,11 @@ class PgnParser
       if to.match(/\+/)
         check = true
         to = to.replace '+', ''
-      @moves.push { from: from, to: to, check: check }
+
+      mate = false
+      if to.match(/\#/)
+        mate = true
+        to = to.replace '#', ''
+      @moves.push { from: from, to: to, check: check, mate: mate }
 
 window.PgnParser = PgnParser

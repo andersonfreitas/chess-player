@@ -22,6 +22,10 @@
       this.moves = parser.moves;
     };
 
+    GameState.prototype.checkMateString = function(move) {
+      return (move.check ? " <strong>(check)</strong>" : "") + (move.mate ? " <strong>(CHECKMATE)</strong>" : "")
+    }
+
     GameState.prototype.nextMove = function() {
       var move = this.moves[this.idx++];
       var obj = this.board[move.from];
@@ -35,9 +39,9 @@
       this.board[move.to] = obj;
 
       if (this.idx % 2 == 1) {
-        $(".moves").append("<li>" + move.to + (move.check ? " <strong>(check)</strong>" : "") + "</li>");
+        $(".moves").append("<li>" + move.to + this.checkMateString(move) + "</li>");
       } else {
-        $(".moves li:last").append("<span class='white-move'>" + move.to + (move.check ? " <strong>(check)</strong>" : "") + "</span>");
+        $(".moves li:last").append("<span class='white-move'>" + move.to + this.checkMateString(move) + "</span>");
       }
 
       obj.animateMoveTo(move.to, ChessPlayer.properties.animation.duration);
