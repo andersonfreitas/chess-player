@@ -17,11 +17,17 @@
         _this = this;
       moves = this.file.match(OPERATOR);
       return _.each(moves, function(move) {
-        var from, to, _ref;
+        var check, from, to, _ref;
         _ref = move.split('-'), from = _ref[0], to = _ref[1];
+        check = false;
+        if (to.match(/\+/)) {
+          check = true;
+          to = to.replace('+', '');
+        }
         return _this.moves.push({
           from: from,
-          to: to
+          to: to,
+          check: check
         });
       });
     };

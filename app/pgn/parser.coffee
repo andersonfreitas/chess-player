@@ -29,6 +29,11 @@ class PgnParser
 
     _.each moves, (move) =>
       [from, to] = move.split('-')
-      @moves.push { from: from, to: to }
+
+      check = false
+      if to.match(/\+/)
+        check = true
+        to = to.replace '+', ''
+      @moves.push { from: from, to: to, check: check }
 
 window.PgnParser = PgnParser

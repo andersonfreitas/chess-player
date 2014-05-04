@@ -35,9 +35,9 @@
       this.board[move.to] = obj;
 
       if (this.idx % 2 == 1) {
-        $(".moves").append("<li>" + move.to + "</li>");
+        $(".moves").append("<li>" + move.to + (move.check ? " <strong>(check)</strong>" : "") + "</li>");
       } else {
-        $(".moves li:last").append("<span class='white-move'>" + move.to + "</span>");
+        $(".moves li:last").append("<span class='white-move'>" + move.to + (move.check ? " <strong>(check)</strong>" : "") + "</span>");
       }
 
       obj.animateMoveTo(move.to, ChessPlayer.properties.animation.duration);
