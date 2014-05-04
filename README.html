@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MAC5744 - EP1</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="mac5744-2014">MAC5744 / 2014</h1><div class="se-section-delimiter"></div>
+
+<h2 id="ep1">EP1</h2>
+
+<p><strong>Importante:</strong> dadas as atuais restrições de segurança dos navegadores, muitas vezes arquivos externos carregados via <code>XMLHttpRequest</code> não funcionam. Portanto, a aplicação pode ser visualizada sem problemas no link abaixo:</p>
+
+<p><a href="http://andersonfreitas.s3-website-sa-east-1.amazonaws.com/MAC5744/chess-player/">http://andersonfreitas.s3-website-sa-east-1.amazonaws.com/MAC5744/chess-player/</a></p><div class="se-section-delimiter"></div>
+
+<h2 id="autores">Autores</h2>
+
+<ul>
+<li>Anderson Meirelles Freitas</li>
+<li>Lucy Mansilla</li>
+</ul><div class="se-section-delimiter"></div>
+
+<h2 id="instruções-de-uso">Instruções de uso</h2>
+
+<p>Ao abrir o jogo, imediatamente é carregado um arquivo PGN exemplo.</p>
+
+<p>Utilize o mouse para controlar a rotação da cena.</p>
+
+<p>No canto inferior esquerdo há um “log” com as movimentações feitas de acordo com o arquivo PGN.</p>
+
+<p>No canto superior direito existem algumas opções que alteram o estado do jogo, são elas:</p>
+
+<ul>
+<li><strong>Game:</strong> <br>
+<ul><li><strong>pgn:</strong> Opção para carregar um arquivo PGN no formato “hyphenated long algebraic notation”</li>
+<li><strong>reload:</strong> Reposiciona as peças e reinicia as jogadas do arquivo PGN carregado.</li>
+<li><strong>autoplay:</strong> Habilita a animação das jogadas automaticamente</li>
+<li><strong>next:</strong> Caso o autoplay esteja desabilitado, é possível ir passo-a-passo nas jogadas com essa função</li></ul></li>
+<li><strong>Scene:</strong> <br>
+<ul><li><strong>projection:</strong> Alterna entre a projeção perspectiva e orthográfica</li>
+<li><strong>wireframe:</strong> Alterna entre triangulos e linhas</li>
+<li><strong>lightning:</strong> Ativa/desativa a iluminação nos shaders</li>
+<li><strong>diffuseLight:</strong> Cor da luz diffusa incidente na cena</li>
+<li><strong>zoom:</strong> Fator que reposiciona o parametro <code>eye</code> na função <code>lookAt</code></li></ul></li>
+<li><strong>Animation:</strong> <br>
+<ul><li><strong>duration:</strong> Tempo (em ms) em que deve ocorrer a interpolação da movimentação</li>
+<li><strong>delay:</strong> Quando o <code>autoplay</code> está ativado, é o intervalo entre uma movimentação e outra</li></ul></li>
+</ul><div class="se-section-delimiter"></div>
+
+<h2 id="sobre-o-desenvolvimento">Sobre o desenvolvimento</h2>
+
+<p>A aplicação foi dividida em diversas classes JavaScript (OOP). A classe <code>BaseObject</code> representa qualquer objeto renderizável, e na classe principal da aplicação <code>ChessPlayer</code> é mantido um simples <em>object graph</em> onde chamamos o método <code>render()</code> de cada objeto instanciado.</p>
+
+<p>A animação da movimentação das peças é feita usando uma curva quadrática, onde os parametros <span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-291-Frame" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-2492" style="width: 0.637em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.521em; height: 0px; font-size: 124%;"><span style="position: absolute; clip: rect(1.846em 1000.003em 2.653em -0.516em); top: -2.474em; left: 0.003em;"><span class="mrow" id="MathJax-Span-2493"><span class="mi" id="MathJax-Span-2494" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.48em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 0.718em; vertical-align: -0.068em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-291">x</script>, <span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-292-Frame" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-2495" style="width: 0.579em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.464em; height: 0px; font-size: 124%;"><span style="position: absolute; clip: rect(1.846em 1000.003em 2.883em -0.516em); top: -2.474em; left: 0.003em;"><span class="mrow" id="MathJax-Span-2496"><span class="mi" id="MathJax-Span-2497" style="font-family: STIXGeneral-Italic;">y</span></span><span style="display: inline-block; width: 0px; height: 2.48em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 0.932em; vertical-align: -0.354em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-292">y</script> e <span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-293-Frame" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-2498" style="width: 0.521em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.406em; height: 0px; font-size: 124%;"><span style="position: absolute; clip: rect(1.904em 1000.003em 2.71em -0.516em); top: -2.474em; left: 0.003em;"><span class="mrow" id="MathJax-Span-2499"><span class="mi" id="MathJax-Span-2500" style="font-family: STIXGeneral-Italic;">z</span></span><span style="display: inline-block; width: 0px; height: 2.48em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 0.789em; vertical-align: -0.139em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-293">z</script> são interpolados com a função <code>lerp()</code>:</p><div class="se-section-delimiter"></div>
+
+<p><span class="MathJax_Preview"></span><div class="MathJax_Display" role="textbox" aria-readonly="true" style="text-align: center;"><span class="MathJax" id="MathJax-Element-272-Frame"><nobr><span class="math" id="MathJax-Span-2416" style="width: 13.252em; display: inline-block;"><span style="display: inline-block; position: relative; width: 10.66em; height: 0px; font-size: 124%;"><span style="position: absolute; clip: rect(1.616em 1000.003em 2.883em -0.458em); top: -2.474em; left: 0.003em;"><span class="mrow" id="MathJax-Span-2417"><span class="mi" id="MathJax-Span-2418" style="font-family: STIXGeneral-Italic;">l<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-2419" style="font-family: STIXGeneral-Italic;">e</span><span class="mi" id="MathJax-Span-2420" style="font-family: STIXGeneral-Italic;">r<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-2421" style="font-family: STIXGeneral-Italic;">p</span><span class="mo" id="MathJax-Span-2422" style="font-family: STIXGeneral-Regular;">(</span><span class="mi" id="MathJax-Span-2423" style="font-family: STIXGeneral-Italic;">a</span><span class="mo" id="MathJax-Span-2424" style="font-family: STIXGeneral-Regular;">,</span><span class="mi" id="MathJax-Span-2425" style="font-family: STIXGeneral-Italic; padding-left: 0.176em;">b</span><span class="mo" id="MathJax-Span-2426" style="font-family: STIXGeneral-Regular;">,</span><span class="mi" id="MathJax-Span-2427" style="font-family: STIXGeneral-Italic; padding-left: 0.176em;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mo" id="MathJax-Span-2428" style="font-family: STIXGeneral-Regular;">)</span><span class="mo" id="MathJax-Span-2429" style="font-family: STIXGeneral-Regular; padding-left: 0.291em;">=</span><span class="mi" id="MathJax-Span-2430" style="font-family: STIXGeneral-Italic; padding-left: 0.291em;">a</span><span class="mo" id="MathJax-Span-2431" style="font-family: STIXGeneral-Regular; padding-left: 0.233em;">+</span><span class="mi" id="MathJax-Span-2432" style="font-family: STIXGeneral-Italic; padding-left: 0.233em;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mo" id="MathJax-Span-2433" style="font-family: STIXGeneral-Regular;">(</span><span class="mi" id="MathJax-Span-2434" style="font-family: STIXGeneral-Italic;">b</span><span class="mo" id="MathJax-Span-2435" style="font-family: STIXGeneral-Regular; padding-left: 0.233em;">−</span><span class="mi" id="MathJax-Span-2436" style="font-family: STIXGeneral-Italic; padding-left: 0.233em;">a</span><span class="mo" id="MathJax-Span-2437" style="font-family: STIXGeneral-Regular;">)</span></span><span style="display: inline-block; width: 0px; height: 2.48em;"></span></span></span><span style="border-left-width: 0.004em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.218em; vertical-align: -0.354em;"></span></span></nobr></span></div><script type="math/tex; mode=display" id="MathJax-Element-272">lerp(a, b, t) = a + t(b - a)</script></p>
+
+<h3 id="estrutura-do-projeto">Estrutura do projeto</h3>
+
+<p>Abaixo a árvore da pasta principal gerada com o comando <code>tree</code>:</p>
+
+<pre><code>├── README.md                      # este arquivo
+├── app                            # pasta principal com os objetos da applicação
+│&nbsp;&nbsp; ├── BaseObject.js
+│&nbsp;&nbsp; ├── Board.js                   # tabuleiro
+│&nbsp;&nbsp; ├── BoardCube.js               # base do tabuleiro
+│&nbsp;&nbsp; ├── ChessPiece.js              # representa uma peça no tabuleiro. Responsável por carregar o arquivo OBJ correspondente.
+│&nbsp;&nbsp; ├── GameState.js               # mantém o estado do jogo carregado do PGN
+│&nbsp;&nbsp; ├── TrackBall.js               # movimentação da câmera
+│&nbsp;&nbsp; └── pgn                        # parser de PGN
+│&nbsp;&nbsp;     ├── parser.coffee          # código fonte do parser em CoffeeScript
+│&nbsp;&nbsp;     └── parser.js              # arquivo .js compilado via 'coffee -w -c .'
+├── app.js
+├── assets                         # arquivos carregados pela aplicação
+│&nbsp;&nbsp; ├── app.css
+│&nbsp;&nbsp; ├── images                     
+│&nbsp;&nbsp; ├── obj                        # arquivos OBJ
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── bispo.obj
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── cavalo.obj
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── cube.obj
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── peao.obj
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── rainha.obj
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── rei.obj
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── torre.obj
+│&nbsp;&nbsp; ├── pgn                        # arquivos PGN de exemplo
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── MacKenzie-hlan.pgn
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── MacKenzie.pgn
+│&nbsp;&nbsp; │&nbsp;&nbsp; ├── ep1.pgn
+│&nbsp;&nbsp; │&nbsp;&nbsp; └── london.pgn
+│&nbsp;&nbsp; └── shaders                    # shaders da aplicação
+│&nbsp;&nbsp;     ├── shader.fsh
+│&nbsp;&nbsp;     └── shader.vsh
+├── chess-player.js                # classe principal
+├── index.html
+├── js                             # bibliotecas externas
+│&nbsp;&nbsp; ├── coffee-script.js
+│&nbsp;&nbsp; ├── dat.gui.min.js
+│&nbsp;&nbsp; ├── gl-matrix-min.js
+│&nbsp;&nbsp; ├── jquery-1.11.0.min.js
+│&nbsp;&nbsp; ├── jquery-1.11.0.min.map
+│&nbsp;&nbsp; ├── requestAnimationFrame.js
+│&nbsp;&nbsp; ├── stats.min.js
+│&nbsp;&nbsp; ├── underscore-min.js
+│&nbsp;&nbsp; └── underscore-min.map
+├── utils.js                       # classe com utilitários
+└── webgl.js                       # classe para iniciar o WebGL
+</code></pre><div class="se-section-delimiter"></div>
+
+<h2 id="bibliotecas-externas">Bibliotecas externas</h2>
+
+<ul>
+<li><strong><a href="http://code.google.com/p/dat-gui/">dat-gui</a></strong> <br>
+Usado para criar os controles interativos da aplicação.</li>
+<li><strong><a href="http://glmatrix.net">glMatrix</a></strong> <br>
+Biblioteca com operações para se trabalhar com matrizes, vetores e quaternions.</li>
+<li><strong><a href="http://jquery.com">jQuery</a></strong> <br>
+Utilitário para acessar o DOM do HTML. Usado para criar o console das jogadas do PGN.</li>
+<li><strong><a href="http://paulirish.com/2011/requestanimationframe-for-smart-animating/">requestAnimationFrame</a></strong> <br>
+Polyfill para que a função <code>requestAnimationFrame</code> funcione em diversos browsers.</li>
+<li><strong><a href="https://github.com/mrdoob/stats.js">stats.js</a></strong> <br>
+Métricas de desempenho da renderização (em fps/ms/Hz).</li>
+<li><strong><a href="http://underscorejs.org">underscore.js</a></strong> <br>
+Provem diversos helpers para a linguagem javascript inspirado de linguagens funcionais. Traz funções como <code>map</code>, <code>reduce</code>, <code>each</code>, etc.</li>
+</ul><div class="se-section-delimiter"></div>
+
+<h2 id="requisitos-do-ep">Requisitos do EP</h2>
+
+<pre><code>10 [X] Peças em OBJ carregadas corretamente
+10 [X] PGN carregado e interpretado corretamente
+ 5 [X] Tabuleiro exibido corretamente (espessura, cores e quadrados)
+10 [X] Peças instanciadas e posicionadas (inicialmente) corretamente
+ 5 [X] Perspectiva e viewport atualizados ao redimensionar a janela
+10 [X] Troca de Projeções oferecida e executada corretamente
+ 5 [X] Cena centralizada no viewport
+10 [X] Movimentação da câmera executado corretamente
+ 7 [X] Movimentação das peças gradual e correta.
+ 5 [X] Peças desaparecem corretamente
+ 5 [X] Zoom In/Out executado corretamente
+ 5 [X] Pausar/Continuar o jogo desenvolvido e executado corretamente
+ 5 [X] Reiniciar o jogo desenvolvido e executado corretamente
+ 3 [X] Arquivo LEIAME.TXT criado com conteúdo satisfatório e correto
+ 5 [X] Projeto entregue corretamente no PACA e compactado
+</code></pre>
+
+<h3 id="limitações">Limitações</h3>
+
+<ul>
+<li>O arquivo PGN pode conter vários jogos. Por enquanto apenas o primeiro é considerado.</li>
+</ul></div></body>
+</html>

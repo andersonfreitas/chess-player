@@ -127,9 +127,6 @@ Provem diversos helpers para a linguagem javascript inspirado de linguagens func
      3 [X] Arquivo LEIAME.TXT criado com conteúdo satisfatório e correto
      5 [X] Projeto entregue corretamente no PACA e compactado
 
-# Tarefas
+### Limitações
 
-    [ ] start / stop / reload
-    [ ] Detectar os bounds do jogo
-    [ ] Interpretar as jogadas com + e #, O-O e o-o-o
-    [ ] (Opcional) Implementar modelo Blinn-phong no vertex shader (smooth)
+ - O arquivo PGN pode conter vários jogos. Por enquanto apenas o primeiro é considerado.
