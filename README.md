@@ -5,10 +5,9 @@
 
 [http://andersonfreitas.s3-website-sa-east-1.amazonaws.com/MAC5744/chess-player/](http://andersonfreitas.s3-website-sa-east-1.amazonaws.com/MAC5744/chess-player/)
 
-## Autores
+## Autor
 
  - Anderson Meirelles Freitas
- - Lucy Mansilla
 
 ## Instruções de uso
 
@@ -138,3 +137,7 @@ Provem diversos helpers para a linguagem javascript inspirado de linguagens func
   - [ ] follow up subtask #4321
   - [ ] final subtask cc @mention
 - [ ] a separate task
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> are supported 
+- [x] list syntax is required (any unordered or ordered list supported) 
+- [x] this is a complete item 
+- [ ] this is an incomplete item
