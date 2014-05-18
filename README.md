@@ -130,3 +130,10 @@ Provem diversos helpers para a linguagem javascript inspirado de linguagens func
 ### Limitações
 
  - O arquivo PGN pode conter vários jogos. Por enquanto apenas o primeiro é considerado.
+
+
+- [ ] a bigger project
+  - [ ] first subtask #1234
+  - [ ] follow up subtask #4321
+  - [ ] final subtask cc @mention
+- [ ] a separate task
