@@ -131,6 +131,7 @@ Provem diversos helpers para a linguagem javascript inspirado de linguagens func
 
  - O arquivo PGN pode conter vários jogos. Por enquanto apenas o primeiro é considerado.
 
+### Tasks
 
 - [ ] a bigger project
   - [ ] first subtask #1234
